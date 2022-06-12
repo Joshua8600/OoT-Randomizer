@@ -2554,6 +2554,11 @@ class SettingInfos:
         gui_params     = {
             'randomize_key': 'randomize_settings',
         },
+        disable        = {
+            'dungeons':  {'settings' : ['fast_tokens']},
+            'overworld': {'settings' : ['fast_tokens']},
+            'all':       {'settings' : ['fast_tokens']},
+        },
     )
 
     shuffle_scrubs = Combobox(
@@ -3115,6 +3120,18 @@ class SettingInfos:
         ''',
         default        = False,
         shared         = True,
+    )
+
+    fast_tokens = Checkbutton(
+        gui_text       = 'Fast Gold Skulltula Drops',
+        gui_tooltip    = '''\
+            Collecting Gold Skulltula Tokens does
+            not freeze the game. The text box showing the
+            collected item automatically closes. Incompatible
+            with shuffled tokens.
+        ''',
+        default        = False,
+        shared         = True
     )
 
     plant_beans = Checkbutton(
