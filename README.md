@@ -17,7 +17,6 @@ Differences between this branch and the main Dev branch (on [Testrunner's Fork](
 * Additional Thieves Hideout Shuffle option to savewarp to the overworld instead of the vanilla savewarp to the 1 Torch Carpenter Jail Cell
 * The following open PRs on the main branch:
   * OoTRandomizer/OoT-Randomizer#1899
-  * OoTRandomizer/OoT-Randomizer#1977
   * OoTRandomizer/OoT-Randomizer#1982
 
 ## Custom Music
