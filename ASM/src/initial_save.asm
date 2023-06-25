@@ -32,3 +32,30 @@ write_initial_save:
 @@return:
     jr      ra
     nop
+
+;=======================================
+; Overrides Thieves Hideout Spawn Point
+;=======================================
+set_hideout_spawn_point:
+    ; Displaced code
+    lh      v1, 0x0066(s0)
+    slti    $at, v1, 0x001B
+
+    ; Preserve vanilla savewarp if hideout shuffle
+    ; is enabled but the savewarp option is vanilla.
+    ; This is always zero when hideout shuffle is off.
+    lb      t3, HIDEOUT_SAVEWARP_OVERRIDE
+    beqz    t3, @@return_hideout_spawn
+
+    ; Disable dungeon check if scene ID = 0x000C (hideout)
+    ; and Thieves Hideout ER is on
+    ori     t4, $zero, 0x000C
+    bne     t4, v1, @@return_hideout_spawn
+    lb      t3, HIDEOUT_SHUFFLED
+    beqz    t3, @@return_hideout_spawn
+    nop
+    ori     $at, $zero, 0x0000
+
+@@return_hideout_spawn:
+    jr      $ra
+    nop
