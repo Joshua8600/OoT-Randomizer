@@ -4,13 +4,41 @@ This is a randomizer for _The Legend of Zelda: Ocarina of Time_ for the Nintendo
 
 **WARNING:** This branch is a modified version of the randomizer. It is **not** officially supported and may be **very unstable**.
 Please refrain from asking questions and from reporting issues in the main Randomizer Discord when using this branch.
-Instead, you can open an issue on this fork [here](https://github.com/Roman971/OoT-Randomizer/issues) or contact me directly on discord (Roman#7295) for any help, report or request.
+Instead, you can open an issue on this fork [here](https://github.com/mracsys/OoT-Randomizer/issues) or contact me directly on discord (mracsys) for any help, report or request.
 
 Differences between this branch and the main Dev branch (on [Testrunner's Fork](https://github.com/TestRunnerSRL/OoT-Randomizer/tree/Dev)):
-* Various GUI tweaks and improvements along with setting tooltip/option changes
-* 2 new advanced ER settings: "Mixed Entrance Pools" and "Decouple Entrances"
-* Picking up Gold Skulltula Tokens in non-Tokensanity displays a self-closing textbox which no longer freezes the player.
-* New cosmetic setting to randomize the color of some additional equipment and items.
+
+* Features from [Roman971](https://github.com/Roman971/OoT-Randomizer)'s branch
+  * 2 new advanced ER settings: "Mixed Entrance Pools" and "Decouple Entrances"
+  * "Fast Tokens" setting makes picking up Gold Skulltula Tokens no longer freeze the player and display a self-closing textbox.
+  * New cosmetic setting to randomize the color of some additional equipment and items.
+* "Climb Anywhere" setting allows climbing on almost any vertical surface and hookshotting any surface.
+* "Disable Item Age Checks" setting makes most items usable as both ages.
+* Additional Thieves Hideout Shuffle option to savewarp to the overworld instead of the vanilla savewarp to the 1 Torch Carpenter Jail Cell
+* The following open PRs on the main branch:
+  * OoTRandomizer/OoT-Randomizer#1899
+  * OoTRandomizer/OoT-Randomizer#1977
+  * OoTRandomizer/OoT-Randomizer#1982
+
+## Custom Music
+
+Custom music in this branch uses a new format '.ootrs' in order to include custom instrument banks.
+ootrs files are zip archives containing the normal .meta and .seq files for the music sequence plus .bankmeta and .zbank files for new instrument banks.
+A conversion script `convert_seq_to_meta.py` is provided in the `data/Music` folder to convert the old format files to ootrs for us on this branch.
+No files are deleted or changed in the process other than creating the ootrs archives.
+More details on this change can be found at OoTRandomizer/OoT-Randomizer#1966.
+
+## Hidden Menus
+
+Holding different D-pad directions on the pause menu will show the following information:
+* Right: Dungeon Vanilla/MQ Identification
+* Down: Medallion and Stone Locations
+* Right: Dungeon Keys available and (collected), Silver Rupees collected
+
+Holding the A button on the pause menu will show all of this information on one screen.
+
+Silver Rupee count colors match the colors in the item description shown when picking them up. Order from left to right roughly aligns with the order the silver rupee puzzles are encountered in each dungeon.
+
 
 ## Index
 
@@ -99,7 +127,7 @@ Save the .ZOBJ file of the desired model in `data/Models/Adult` or `data/Models/
 
 Once the models are saved, the program may be opened and the model(s) selected under the `Cosmetics` tab.
 
-If the model's skeleton is similar enough to Link, the randomizer will use Link's skeleton. If it is substantially different, then a note will be placed on the pause screen to make it clear that the skeleton was changed.
+Custom models can be found in the [OoT Online repository](https://github.com/hylian-modding/Z64-CustomPlayerModels/tree/master/oot/PlayAsPackages)
 
 ### Known issues
 
