@@ -3809,6 +3809,16 @@ class SettingInfos:
         shared         = True,
     )
 
+    climb_anywhere = Checkbutton(
+        gui_text       = 'Climb Anywhere',
+        gui_tooltip    = '''\
+            Make all vertical surfaces climbable and
+            most surfaces hookshot-able.
+        ''',
+        shared         = True,
+        default        = False,
+    )
+
     # Cosmetics
 
     default_targeting = Combobox(
