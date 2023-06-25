@@ -537,7 +537,7 @@ def shuffle_random_entrances(worlds: list[World]) -> None:
             entrance_pools['Interior'] = world.get_shufflable_entrances(type='Interior', only_primary=True)
             if worlds[0].shuffle_special_interior_entrances:
                 entrance_pools['Interior'] += world.get_shufflable_entrances(type='SpecialInterior', only_primary=True)
-            if worlds[0].settings.shuffle_hideout_entrances:
+            if worlds[0].settings.shuffle_hideout_entrances != 'off':
                 entrance_pools['Interior'] += world.get_shufflable_entrances(type='Hideout', only_primary=True)
             if worlds[0].settings.decouple_entrances:
                 entrance_pools['InteriorReverse'] = [entrance.reverse for entrance in entrance_pools['Interior']]
