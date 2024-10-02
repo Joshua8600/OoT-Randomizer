@@ -2,6 +2,9 @@
 
 #include "z64.h"
 #include "item_draw_table.h"
+#include "misc_colors.h"
+#include "color.h"
+#include "rainbow.h"
 #include "sys_matrix.h"
 
 typedef Gfx* (*append_setup_dl_fn)(Gfx* gfx, uint32_t dl_index);
@@ -772,6 +775,15 @@ void draw_gi_opa_with_flame(z64_game_t* game, uint32_t draw_id) {
     draw_gi_various_opa0(game, draw_id);
     draw_gi_flame(game, item_draw_table[draw_id].args[1].color, item_draw_table[draw_id].args[2].color);
 }
+
+void draw_gi_opa_with_rainbow_flame(z64_game_t* game, uint32_t draw_id) {
+    draw_gi_various_opa0(game, draw_id);
+    colorRGBA8_t rainbow_color;
+    rainbow_color.a = 0xFF;
+    rainbow_color.color = get_rainbow_color(game->gameplay_frames, 10);
+    draw_gi_flame(game, rainbow_color, rainbow_color);
+}
+
 
 void draw_gi_deku_nut_with_flame(z64_game_t* game, uint32_t draw_id) {
 

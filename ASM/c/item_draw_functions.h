@@ -55,5 +55,6 @@ void draw_gi_magic_meter(z64_game_t* game, uint32_t draw_id);
 void draw_gi_flame(z64_game_t *game, colorRGBA8_t prim, colorRGBA8_t env);
 void draw_gi_opa_with_flame(z64_game_t *game, uint32_t draw_id);
 void draw_gi_deku_nut_with_flame(z64_game_t* game, uint32_t draw_id);
+void draw_gi_opa_with_rainbow_flame(z64_game_t* game, uint32_t draw_id);
 
 #endif
