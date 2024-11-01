@@ -4407,3 +4407,4 @@ DemoEffect_DrawJewel_AfterHook:
 .include "hacks/ovl_boss_ganon.asm"
 .include "hacks/ovl_bg_gate_shutter.asm"
 .include "hacks/z_file_choose.asm"
+.include "hacks/ovl_player.asm"
