@@ -390,7 +390,12 @@
             "fix_broken_drops",
             "tcg_requires_lens",
             "no_collectible_hearts",
-            "one_item_per_dungeon"
+            "one_item_per_dungeon",
+            "nnn_1",
+            "nnn_2",
+            "nnn_3",
+            "nnn_4",
+            "nnn_5"
           ]
         },
         {

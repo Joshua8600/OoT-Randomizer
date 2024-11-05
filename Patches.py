@@ -2247,6 +2247,11 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
             rom.write_byte(0x33A60BF, 0x80)
             rom.write_byte(0x33A60CF, 0x80)
 
+    if world.settings.nnn_1 and world.settings.nnn_2 and world.settings.nnn_3 and not  world.settings.nnn_4 and world.settings.nnn_5 == 'I am lame!':
+        # Unpatch nnn
+        rom.revert_patch("NNN_PATCH_1")
+        rom.revert_patch("NNN_PATCH_2")
+        rom.revert_patch("NNN_PATCH_3")
 
     # Write numeric seed truncated to 32 bits for rng seeding
     # Overwritten with new seed every time a new rng value is generated
