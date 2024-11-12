@@ -84,47 +84,46 @@ class State:
         # Extra Ruto's Letter are automatically emptied
         return self.has_any_of(ItemInfo.bottle_ids) or self.has(Rutos_Letter, 2)
 
-    def has_hearts(self, count: int) -> bool:
+    def has_hearts(self, count: int, **kwargs) -> bool:
         # Warning: This is limited by World.max_progressions so it currently only works if hearts are required for LACS, bridge, or Ganon bk
         return self.heart_count() >= count
 
-    def heart_count(self) -> int:
+    def heart_count(self, **kwargs) -> int:
         # Warning: This is limited by World.max_progressions so it currently only works if hearts are required for LACS, bridge, or Ganon bk
         return (
             self.item_count(Piece_of_Heart) // 4 # aliases ensure Heart Container and Piece of Heart (Treasure Chest Game) are included in this
             + 3 # starting hearts
         )
 
-    def has_medallions(self, count: int) -> bool:
+    def has_medallions(self, count: int, **kwargs) -> bool:
         return self.count_of(ItemInfo.medallion_ids) >= count
 
-    def has_stones(self, count: int) -> bool:
+    def has_stones(self, count: int, **kwargs) -> bool:
         return self.count_of(ItemInfo.stone_ids) >= count
-
 
     def has_dungeon_rewards(self, count: int, **kwargs) -> bool:
         return (self.count_of(ItemInfo.medallion_ids) + self.count_of(ItemInfo.stone_ids)) >= count
 
-    def has_ocarina_buttons(self, count: int) -> bool:
+    def has_ocarina_buttons(self, count: int, **kwargs) -> bool:
         return (self.count_of(ItemInfo.ocarina_buttons_ids)) >= count
 
     # TODO: Store the item's solver id in the goal
-    def has_item_goal(self, item_goal: dict[str, Any]) -> bool:
+    def has_item_goal(self, item_goal: dict[str, Any], **kwargs) -> bool:
         return self.solv_items[ItemInfo.solver_ids[escape_name(item_goal['name'])]] >= item_goal['minimum']
 
-    def has_full_item_goal(self, category: GoalCategory, goal: Goal, item_goal: dict[str, Any]) -> bool:
+    def has_full_item_goal(self, category: GoalCategory, goal: Goal, item_goal: dict[str, Any], **kwargs) -> bool:
         local_goal = self.world.goal_categories[category.name].get_goal(goal.name)
         per_world_max_quantity = local_goal.get_item(item_goal['name'])['quantity']
         return self.solv_items[ItemInfo.solver_ids[escape_name(item_goal['name'])]] >= per_world_max_quantity
 
-    def has_all_item_goals(self) -> bool:
+    def has_all_item_goals(self, **kwargs) -> bool:
         for category in self.world.goal_categories.values():
             for goal in category.goals:
                 if not all(map(lambda i: self.has_full_item_goal(category, goal, i), goal.items)):
                     return False
         return True
 
-    def had_night_start(self) -> bool:
+    def had_night_start(self, **kwargs) -> bool:
         stod = self.world.settings.starting_tod
         # These are all not between 6:30 and 18:00
         if (stod == 'sunset' or         # 18
@@ -136,7 +135,7 @@ class State:
             return False
 
     # Used for fall damage and other situations where damage is unavoidable
-    def can_live_dmg(self, hearts: int) -> bool:
+    def can_live_dmg(self, hearts: int, **kwargs) -> bool:
         mult = self.world.settings.damage_multiplier
         if hearts*4 >= 3:
             return mult != 'ohko' and mult != 'quadruple'
