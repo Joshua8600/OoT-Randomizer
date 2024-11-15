@@ -2406,7 +2406,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
             rom.write_byte(0x33A60BF, 0x80)
             rom.write_byte(0x33A60CF, 0x80)
 
-    if world.settings.nnn_1 and world.settings.nnn_2 and world.settings.nnn_3 and not  world.settings.nnn_4 and world.settings.nnn_5 == 'I am lame!':
+    if not world.nnn:
         # Unpatch nnn
         rom.revert_patch("NNN_PATCH_1")
         rom.revert_patch("NNN_PATCH_2")

@@ -4077,11 +4077,11 @@ class SettingInfos:
             By enabling this you acknowledge that you are lame and are
             declining to participate in No Deku Nut November.
         ''',
-        shared        = False,
+        shared        = True,
         default       = False,
         disable        = {
             False:  {'settings': ['nnn_2', 'nnn_3', 'nnn_4', 'nnn_5']}
-        },
+        }, 
     )
 
     nnn_2 = Checkbutton (
@@ -4090,7 +4090,7 @@ class SettingInfos:
             By enabling this you acknowledge that you are lame and are
             declining to participate in No Deku Nut November.
     ''',
-        shared        = False,
+        shared        = True,
         default       = False,
         disable        = {
             False:  {'settings': ['nnn_3', 'nnn_4', 'nnn_5']}
@@ -4106,7 +4106,7 @@ class SettingInfos:
             By enabling this you acknowledge that you are lame and are
             declining to participate in No Deku Nut November.
     ''',
-        shared        = False,
+        shared        = True,
         default       = False,
         disable        = {
             False:  {'settings': ['nnn_4', 'nnn_5']}
@@ -4122,7 +4122,7 @@ class SettingInfos:
             By disabling this you acknowledge that you are lame and are
             declining to participate in No Deku Nut November.
     ''',
-        shared        = False,
+        shared        = True,
         default       = True,
         disable        = {
             True:  {'settings': ['nnn_5']}
