@@ -150,7 +150,7 @@
             "Gerudo Training Ground MQ Icicle Room Silver Rupee Icicles": "True",
             "Gerudo Training Ground MQ Icicle Room Silver Rupee Center": "True",
             "Gerudo Training Ground MQ Icicle Room Silver Rupee Ceiling": "
-                can_use(Longshot) or logic_gtg_without_hookshot or
+                can_use(Longshot) or (logic_gtg_without_hookshot and has_soul(Wallmaster)) or
                 (logic_gtg_mq_with_hookshot and can_use(Hookshot))",
             "Gerudo Training Ground MQ Icicle Room Silver Rupee Above Void": "True",
             "Gerudo Training Ground MQ Slopes Freezard": "has_soul(Freezard) and (is_adult or (Kokiri_Sword and Sticks) or has_explosives)",
