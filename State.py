@@ -106,7 +106,6 @@ class State:
     def has_stones(self, count: int, **kwargs) -> bool:
         return self.count_distinct(ItemInfo.stone_ids) >= count
 
-
     def has_dungeon_rewards(self, count: int, **kwargs) -> bool:
         return self.count_distinct(ItemInfo.medallion_ids) + self.count_distinct(ItemInfo.stone_ids) >= count
 

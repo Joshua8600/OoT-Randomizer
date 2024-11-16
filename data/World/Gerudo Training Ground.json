@@ -117,7 +117,7 @@
             "Gerudo Training Ground Boulder Room Silver Rupee Ledge": "True",
             "Gerudo Training Ground Boulder Room Silver Rupee Top Left": "True",
             "Gerudo Training Ground Boulder Room Silver Rupee Ceiling": "
-                can_use(Hookshot) or logic_gtg_without_hookshot"
+                can_use(Hookshot) or (logic_gtg_without_hookshot and has_soul(Wallmaster))"
         },
         "exits": {
             "Gerudo Training Ground Heavy Block Room": "

@@ -19,6 +19,7 @@ Fishing Game Shuffle - Shuffle the fish from the fishing game. The fish in the p
 ## Index
 
 * [RealRob's Changelog](#realrob-changelog)
+  * [v118](#v118)
   * [v117](#v117)
   * [v116](#v116)
   * [v115](#v115)
@@ -143,6 +144,10 @@ Fishing Game Shuffle - Shuffle the fish from the fishing game. The fish in the p
   * [4.0](#40)
 
 ## RealRob Changelog
+### v118
+  * Fix Shadow Temple MQ Spike Wall Skulltula logic
+  * Fix GTG/MQ ceiling silver rupee wallmaster logic
+
 ### v117
   * Fix fix broken drops crash when changing rooms with deku shield in child spirit.
 
