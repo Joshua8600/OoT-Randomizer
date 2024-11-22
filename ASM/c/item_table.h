@@ -341,9 +341,11 @@ typedef enum GetItemID {
     /* 0x012E */ GI_SHADOW_MEDALLION,
     /* 0x012F */ GI_SPIRIT_MEDALLION,
 
+    // New items in Dev-Rob which are not in main Dev
+    // Some previously used IDs may be skipped, to simplify auto-tracker support
 
     // Soul Shuffle GI IDs
-    GI_SOUL_STALFOS,
+    GI_SOUL_STALFOS = 0x0200,
     GI_SOUL_OCTOROK,
     GI_SOUL_WALLMASTER,
     GI_SOUL_DODONGO,
@@ -423,10 +425,10 @@ typedef enum GetItemID {
     GI_FISH_ADULT_16LB,
     GI_FISH_LOACH,
 
-    /* 0x0130 */ GI_RANDO_MAX
+    /* 0x024D */ GI_RANDO_MAX
 } GetItemId;
 
-_Static_assert(GI_RANDO_MAX == 0x017D, "Remember to update the comment and the assert for the value of GI_RANDO_MAX when adding new items");
+_Static_assert(GI_RANDO_MAX == 0x024D, "Remember to update the comment and the assert for the value of GI_RANDO_MAX when adding new items");
 
 typedef enum {
     /*  0 */ BROWN_CHEST,            // big default chest
