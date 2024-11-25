@@ -144,6 +144,9 @@ Fishing Game Shuffle - Shuffle the fish from the fishing game. The fish in the p
   * [4.0](#40)
 
 ## RealRob Changelog
+### v119
+  * Add key ring colors
+
 ### v118
   * Fix Shadow Temple MQ Spike Wall Skulltula logic
   * Fix GTG/MQ ceiling silver rupee wallmaster logic
