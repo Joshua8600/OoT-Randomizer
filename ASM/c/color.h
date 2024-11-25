@@ -18,17 +18,23 @@ typedef struct
 
 typedef struct
 {
-    union
-    {
-        struct
-        {
-            uint8_t r;
-            uint8_t g;
-            uint8_t b;
+    union {
+        struct {
+            union
+            {
+                struct
+                {
+                    uint8_t r;
+                    uint8_t g;
+                    uint8_t b;
+                };
+                colorRGB8_t color;
+            };
+            uint8_t a;
         };
-        colorRGB8_t color;
+        uint32_t hex;
     };
-    uint8_t a;
+    
 } colorRGBA8_t;
 
 typedef struct
