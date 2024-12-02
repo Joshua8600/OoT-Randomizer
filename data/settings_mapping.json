@@ -131,8 +131,8 @@
           ]
         },
         {
-          "name": "various_section",
-          "text": "Various",
+          "name": "open_section",
+          "text": "Open",
           "row_span": [6,6,9],
           "settings": [
             "open_forest",
@@ -148,11 +148,6 @@
             "bridge_rewards",
             "bridge_tokens",
             "bridge_hearts",
-            "triforce_hunt",
-            "triforce_count_per_world",
-            "triforce_goal_per_world",
-            "free_bombchu_drops",
-            "one_item_per_dungeon",
             "trials_random",
             "trials"
           ]
@@ -406,12 +401,7 @@
             "one_item_per_dungeon",
             "prevent_guay_respawns",
             "minimap_enemy_tracker",
-            "dogs_anywhere",
-            "nnn_1",
-            "nnn_2",
-            "nnn_3",
-            "nnn_4",
-            "nnn_5"
+            "dogs_anywhere"
           ]
         },
         {
