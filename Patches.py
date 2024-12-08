@@ -814,10 +814,10 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
         rom.write_int16s(0xB6D460, [0x0030, 0x0035, 0x0036])  # Change trade items revert table to prevent all reverts
 
     if world.settings.adult_trade_shuffle or world.settings.item_pool_value in ('plentiful', 'ludicrous'):
-        rom.write_int16(rom.sym('CFG_ADULT_TRADE_SHUFFLE'), 0x0001)
+        rom.write_byte(rom.sym('CFG_ADULT_TRADE_SHUFFLE'), 0x01)
         move_fado_in_lost_woods(rom)
     if world.settings.shuffle_child_trade or world.settings.logic_rules == 'glitched':
-        rom.write_int16(rom.sym('CFG_CHILD_TRADE_SHUFFLE'), 0x0001)
+        rom.write_byte(rom.sym('CFG_CHILD_TRADE_SHUFFLE'), 0x01)
 
     if world.settings.shuffle_overworld_entrances:
         rom.write_byte(rom.sym('OVERWORLD_SHUFFLED'), 1)
@@ -1439,8 +1439,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
     poe_points = world.settings.big_poe_count * 100
     rom.write_int16(0xEE69CE, poe_points)
     # update dialogue
-    new_message = "\x08Hey, young man. What's happening \x01today? If you have a \x05\x41Poe\x05\x40, I will \x01buy it.\x04\x1AIf you earn \x05\x41%d points\x05\x40, you'll\x01be a happy man! Heh heh.\x04\x08Your card now has \x05\x45\x1E\x01 \x05\x40points.\x01Come back again!\x01Heh heh heh!\x02" % poe_points
-    update_message_by_id(messages, 0x70F5, new_message)
+    # 0x70F5 is done in build_misc_location_hints
     if world.settings.big_poe_count != 10:
         new_message = "\x1AOh, you brought a Poe today!\x04\x1AHmmmm!\x04\x1AVery interesting!\x01This is a \x05\x41Big Poe\x05\x40!\x04\x1AI'll buy it for \x05\x4150 Rupees\x05\x40.\x04On top of that, I'll put \x05\x41100\x01points \x05\x40on your card.\x04\x1AIf you earn \x05\x41%d points\x05\x40, you'll\x01be a happy man! Heh heh." % poe_points
         update_message_by_id(messages, 0x70f7, new_message)
@@ -2112,7 +2111,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
                     update_message_by_id(messages, map_id, map_message, allow_duplicates=True)
             else:
                 dungeon_name, compass_id, map_id = dungeon_list[dungeon.name]
-                if world.mixed_pools_bosses or world.settings.shuffle_dungeon_rewards not in ('vanilla', 'reward'):
+                if world.entrance_rando_reward_hints:
                     vanilla_reward = world.get_location(dungeon.vanilla_boss_name).vanilla_item
                     vanilla_reward_location = world.hinted_dungeon_reward_locations[vanilla_reward]
                     area = HintArea.at(vanilla_reward_location)
@@ -2973,9 +2972,9 @@ def configure_dungeon_info(rom: Rom, world: World) -> None:
     rom.write_int32(rom.sym('CFG_DUNGEON_INFO_MQ_ENABLE'), int(mq_enable))
     rom.write_int32(rom.sym('CFG_DUNGEON_INFO_MQ_NEED_MAP'), int(enhance_map_compass))
     rom.write_int32(rom.sym('CFG_DUNGEON_INFO_REWARD_ENABLE'), int('altar' in world.settings.misc_hints or enhance_map_compass))
-    rom.write_int32(rom.sym('CFG_DUNGEON_INFO_REWARD_NEED_COMPASS'), (2 if world.mixed_pools_bosses or world.settings.shuffle_dungeon_rewards not in ('vanilla', 'reward') else 1) if enhance_map_compass and world.settings.shuffle_dungeon_rewards != 'dungeon' else 0)
+    rom.write_int32(rom.sym('CFG_DUNGEON_INFO_REWARD_NEED_COMPASS'), (2 if world.entrance_rando_reward_hints else 1) if enhance_map_compass and world.settings.shuffle_dungeon_rewards != 'dungeon' else 0)
     rom.write_int32(rom.sym('CFG_DUNGEON_INFO_REWARD_NEED_ALTAR'), int(not enhance_map_compass and world.settings.shuffle_dungeon_rewards != 'dungeon'))
-    rom.write_int32(rom.sym('CFG_DUNGEON_INFO_REWARD_SUMMARY_ENABLE'), int(not world.mixed_pools_bosses and world.settings.shuffle_dungeon_rewards in ('vanilla', 'reward')))
+    rom.write_int32(rom.sym('CFG_DUNGEON_INFO_REWARD_SUMMARY_ENABLE'), int(not world.entrance_rando_reward_hints))
     rom.write_bytes(rom.sym('CFG_DUNGEON_REWARDS'), dungeon_rewards)
     rom.write_bytes(rom.sym('CFG_DUNGEON_IS_MQ'), dungeon_is_mq)
     rom.write_bytes(rom.sym('CFG_DUNGEON_REWARD_AREAS'), dungeon_reward_areas)

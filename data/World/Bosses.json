@@ -165,7 +165,8 @@
     },
     {
         "region_name": "Ganons Castle Tower",
-        "dungeon": "Ganons Castle",
+        "scene": "Ganons Castle Tower",
+        "is_boss_room": true,
         "locations": {
             "Ganons Tower Boss Key Chest": "can_kill_lizalfos and can_kill_stalfos",
             "Ganons Tower Lizalfos 1": "can_kill_lizalfos",
@@ -183,16 +184,18 @@
             "Ganons Tower Keese 7": "can_kill_keese"
         },
         "exits": {
+            "Ganons Castle Main": "True",
             "Ganons Castle Tower Below Boss": "
                 (is_adult or Kokiri_Sword) and
                 (has_soul(Lizalfos_and_Dinalfos) and has_soul(Stalfos) and has_soul(Iron_Knuckle)) and
-                (Boss_Key_Ganons_Castle or (shuffle_pots != 'off'))"
+                (Boss_Key_Ganons_Castle or (shuffle_pots != 'off'))",
+            "Farores Wind Warp": "can_use(Farores_Wind)"
         }
     },
     {
         "region_name": "Ganons Castle Tower Below Boss",
-        "dungeon": "Ganons Castle",
-        "hint": "INSIDE_GANONS_CASTLE",
+        "scene": "Ganons Castle Tower",
+        "is_boss_room": true,
         "alt_hint": "GANONDORFS_CHAMBER",
         "locations": {
             "Ganons Tower Pot 1": "True",
@@ -220,9 +223,8 @@
     },
     {
         "region_name": "Ganondorf Boss Room",
-        "dungeon": "Ganons Castle",
-        "hint": "INSIDE_GANONS_CASTLE",
-        "alt_hint": "GANONDORFS_CHAMBER",
+        "scene": "Ganons Castle Tower",
+        "is_boss_room": true,
         "locations": {
             "Ganondorf Hint": "True",
             "Ganon": "can_use(Light_Arrows)"

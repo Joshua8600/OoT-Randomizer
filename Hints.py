@@ -439,7 +439,7 @@ class HintArea(Enum):
             else:
                 parent_region = current_spot.parent_region
 
-            if parent_region.hint and (original_parent.name == 'Root' or parent_region.name != 'Root'):
+            if (parent_region.hint or (use_alt_hint and parent_region.alt_hint)) and (original_parent.name == 'Root' or parent_region.name != 'Root'):
                 if use_alt_hint and parent_region.alt_hint:
                     return parent_region.alt_hint
                 return parent_region.hint
@@ -1268,7 +1268,7 @@ def build_gossip_hints(spoiler: Spoiler, worlds: list[World]) -> None:
     for world in worlds:
         for location in world.hinted_dungeon_reward_locations.values():
             if world.settings.enhance_map_compass:
-                if world.mixed_pools_bosses or world.settings.shuffle_dungeon_rewards not in ('vanilla', 'reward'):
+                if world.entrance_rando_reward_hints:
                     # In these settings, there is not necessarily one dungeon reward in each dungeon,
                     # so we instead have each compass hint the area of its dungeon's vanilla reward.
                     compass_locations = [
@@ -1810,11 +1810,23 @@ def build_misc_item_hints(world: World, messages: list[Message], allow_duplicate
 def build_misc_location_hints(world: World, messages: list[Message]) -> None:
     for hint_type, data in misc_location_hint_table.items():
         text = data['location_fallback']
-        if hint_type in world.settings.misc_hints:
-            if hint_type in world.misc_hint_location_items:
-                item = world.misc_hint_location_items[hint_type]
+        if hint_type == 'big_poes':
+            # Special cased because we need to insert the big poes number.
+            item = world.misc_hint_location_items[hint_type]
+            poe_points = world.settings.big_poe_count * 100
+            if hint_type in world.settings.misc_hints:
                 text = data['location_text'].format(item=get_hint(get_item_generic_name(item),
-                                                                  world.settings.clearer_hints).text)
+                                                                    world.settings.clearer_hints).text, poe_points=poe_points)
+            else:
+                text = data['location_fallback'].format(poe_points=poe_points)
+            update_message_by_id(messages, data['id'], text)
+            return
+        else:
+            if hint_type in world.settings.misc_hints:
+                if hint_type in world.misc_hint_location_items:
+                    item = world.misc_hint_location_items[hint_type]
+                    text = data['location_text'].format(item=get_hint(get_item_generic_name(item),
+                                                                        world.settings.clearer_hints).text)
 
         update_message_by_id(messages, data['id'], str(GossipText(text, ['Green'], prefix='')), 0x23)
 

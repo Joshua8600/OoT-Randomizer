@@ -23,6 +23,7 @@
     {
         "region_name": "Ganons Castle Main",
         "dungeon": "Ganons Castle",
+        "savewarp": "Ganons Castle Ledge -> Ganons Castle Lobby",
         "exits": {
             "Ganons Castle Forest Trial": "here(is_adult or Kokiri_Sword)",
             "Ganons Castle Water Trial": "True",
@@ -82,7 +83,7 @@
             "Ganons Castle MQ Water Trial Freezard 1": "has_soul(Freezard) and (is_adult or has_explosives or can_use(Dins_Fire))",
             "Ganons Castle MQ Water Trial Freezard 2": "has_soul(Freezard) and (is_adult or has_explosives or can_use(Dins_Fire))",
             "Ganons Castle MQ Water Trial Freezard 3": "has_soul(Freezard) and (is_adult or has_explosives or can_use(Dins_Fire))",
-            "Blue Fire": "has_bottle"
+            "Blue Fire": "has_bottle and (can_jumpslash or has_explosives)"
         },
         "exits": {
             # These boulders share a single switch flag. Breaking one and reloading the room they will all be gone
@@ -310,11 +311,11 @@
         "region_name": "Ganons Castle Deku Scrubs",
         "dungeon": "Ganons Castle",
         "locations": {
-            "Ganons Castle MQ Deku Scrub Center-Left": "True",
-            "Ganons Castle MQ Deku Scrub Center": "True",
-            "Ganons Castle MQ Deku Scrub Center-Right": "True",
-            "Ganons Castle MQ Deku Scrub Left": "True",
-            "Ganons Castle MQ Deku Scrub Right": "True",
+            "Ganons Castle MQ Deku Scrub Center-Left": "can_stun_deku",
+            "Ganons Castle MQ Deku Scrub Center": "can_stun_deku",
+            "Ganons Castle MQ Deku Scrub Center-Right": "can_stun_deku",
+            "Ganons Castle MQ Deku Scrub Left": "can_stun_deku",
+            "Ganons Castle MQ Deku Scrub Right": "can_stun_deku",
             "Free Fairies": "has_bottle"
         }
     }
