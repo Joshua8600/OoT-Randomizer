@@ -183,7 +183,8 @@
             "triforce_count_per_world",
             "triforce_goal_per_world",
             "free_bombchu_drops",
-            "plandomized_locations"
+            "plandomized_locations",
+            "enemizer"
           ]
         },
         {
