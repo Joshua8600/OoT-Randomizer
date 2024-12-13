@@ -68,11 +68,11 @@ def _shuffle_enemies(world: World, enemy_list: dict[tuple[int,int,int,int],int |
 
     if world.settings.enemizer == 'on':
         for enemy_key in to_shuffle:
-            enemy_type = to_shuffle[enemy_key]
-            if type(enemy_type) is EnemyLocation: # EnemyLocation with type restrictions
-                restriction = enemy_type.restrictions
-                meets_enemy_restrictions = enemy_type.meets_enemy_restrictions
-                disallowed_enemies = enemy_type.disallowed_enemies
+            shuffle_enemy = to_shuffle[enemy_key]
+            if type(shuffle_enemy) is EnemyLocation: # EnemyLocation with type restrictions
+                restriction = shuffle_enemy.restrictions
+                meets_enemy_restrictions = shuffle_enemy.meets_enemy_restrictions
+                disallowed_enemies = shuffle_enemy.disallowed_enemies
                 #enemy_type = enemy_type.id
             else: # Just an enemy ID
                 #enemy_type = to_shuffle[enemy_key]
@@ -92,19 +92,24 @@ def _shuffle_enemies(world: World, enemy_list: dict[tuple[int,int,int,int],int |
 # restrictions - list of location's restrictions. Enemies must be tagged with the same restriction in order to be included
 # meets_enemy_restrictions - list of the enemy restrictions that the location meets. Enemies with ENEMY_RESTRICTIONs will not be allowed unless the location is tagged with that restriction
 # Disallowed enemies - list of enemy actor ID's to explicitly exclude from a location
-def get_restricted_enemy_types(enemy_actor_types: dict[int,Enemy], restrictions: list[LOCATION_RESTRICTION], meets_enemy_restrictions: list[ENEMY_RESTRICTION], disallowed_enemies: list[int]):
+def get_restricted_enemy_types(enemy_actor_types: dict[int,Enemy], location_restrictions: list[LOCATION_RESTRICTION], meets_enemy_restrictions: list[ENEMY_RESTRICTION], disallowed_enemies: list[int]):
     #restricted_enemy_actor_types: dict[int,Enemy] = {}
     restricted_enemy_actor_types: list[Enemy] = []
     for enemy in enemy_actor_types:
         meets_restrictions = True
-        for restriction in restrictions:
-            if restriction not in enemy.categories:
+        
+        # Check location restrictions against enemy. An enemy must meet all of the locations restrictions in order to be placed
+        for restriction in location_restrictions:
+            if restriction not in enemy.meets_location_restrictions:
                 meets_restrictions = False
                 break
-        for disallowed in disallowed_enemies:
-            if enemy.id == disallowed:
-                meets_restrictions = False
-                break
+
+        # Check explicitly disallowed enemies
+        if enemy.id in disallowed_enemies:
+            meets_restrictions = False
+            break
+        
+        # Check enemy restrictions against location. A location must meet all of the enemy's restrictions in order to be placed
         for required_category in enemy.required_categories:
             if required_category not in meets_enemy_restrictions:
                 meets_restrictions = False
