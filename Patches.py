@@ -2417,6 +2417,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
         rom.revert_patch("NNN_PATCH_2")
         rom.revert_patch("NNN_PATCH_3")
 
+    # Enemizer
     if world.settings.enemizer != 'off':
         scene_data = process_scenes(rom)
         rom_enemies = get_rom_enemies(scene_data, rom)
@@ -2430,6 +2431,10 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
         rom.write_byte(rom.sym('CFG_ENEMIZER'), 1)
     if world.settings.enemizer == 'change':
         rom.write_byte(rom.sym('CFG_RANDOM_ENEMY_SPAWNS'), 1)
+
+    # Revert Enemizer Patches if it's not enabled
+    if world.settings.enemizer == 'off':
+        rom.revert_patch("ENFD_PATCH_BGM_ENEMIZER")
 
     # Write numeric seed truncated to 32 bits for rng seeding
     # Overwritten with new seed every time a new rng value is generated
