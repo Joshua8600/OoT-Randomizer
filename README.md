@@ -149,6 +149,9 @@ Fishing Game Shuffle - Shuffle the fish from the fishing game. The fish in the p
   * [4.0](#40)
 
 # Enemy Shuffle Changelog
+### v139
+  * Fix raycast check
+
 ### v138
   * Update to main dev 8.2.37
   * Additional enemy restrictions for some water-based locations
