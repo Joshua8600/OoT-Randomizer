@@ -2290,21 +2290,6 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
         rom.write_bytes(0xE061CC, [0x0c, 0x00, 0x99, 0x32, 0x26, 0x05, 0x01, 0x3c])
 
     rom.write_byte(broken_actors_symbol, broken_actors_cfg)
-    if world.settings.enemizer != 'off':
-        scene_data = process_scenes(rom)
-        rom_enemies = get_rom_enemies(scene_data, rom)
-        #for enemy in rom_enemies:
-        #    print(f"{enemy}: {rom_enemies[enemy].id}, # {enemy_actor_typesrom_enemies[enemy].id].name}")
-
-        patch_enemies(world,rom_enemies, world.shuffled_enemies, rom, scene_data, world.settings.enemizer == 'on')
-        for patch_func in enemizer_patches:
-            patch_func(rom, scene_data)
-        rom.write_byte(rom.sym('CFG_PREVENT_GUAY_RESPAWNS'), 1)
-        rom.write_byte(rom.sym('CFG_ENEMIZER'), 1)
-    if world.settings.enemizer == 'change':
-        rom.write_byte(rom.sym('CFG_RANDOM_ENEMY_SPAWNS'), 1)
-
-
 
     # Have the Gold Skulltula Count in the pause menu turn red when equal to the
     # available number of skulls in the world instead of 100.
@@ -2431,6 +2416,20 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
         rom.revert_patch("NNN_PATCH_1")
         rom.revert_patch("NNN_PATCH_2")
         rom.revert_patch("NNN_PATCH_3")
+
+    if world.settings.enemizer != 'off':
+        scene_data = process_scenes(rom)
+        rom_enemies = get_rom_enemies(scene_data, rom)
+        #for enemy in rom_enemies:
+        #    print(f"{enemy}: {rom_enemies[enemy].id}, # {enemy_actor_typesrom_enemies[enemy].id].name}")
+
+        patch_enemies(world,rom_enemies, world.shuffled_enemies, rom, scene_data, world.settings.enemizer == 'on')
+        for patch_func in enemizer_patches:
+            patch_func(rom, scene_data)
+        rom.write_byte(rom.sym('CFG_PREVENT_GUAY_RESPAWNS'), 1)
+        rom.write_byte(rom.sym('CFG_ENEMIZER'), 1)
+    if world.settings.enemizer == 'change':
+        rom.write_byte(rom.sym('CFG_RANDOM_ENEMY_SPAWNS'), 1)
 
     # Write numeric seed truncated to 32 bits for rng seeding
     # Overwritten with new seed every time a new rng value is generated
