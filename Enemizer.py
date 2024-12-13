@@ -207,8 +207,13 @@ def patch_jabu_jabu_room_timer(rom: Rom, scene_data: list[Scene]):
     timer.var = 0x7878 # Patch the timer to have 2 minute time limit
     rom.write_bytes(timer.addr, timer.get_bytes())
 
+# Patch RestrictionFlags list to allow weapons in adult market
+def patch_adult_market(rom: Rom, scene_data: list[Scene]):
+    rom.write_int32(0xB6D2B0 + 0xB4, 0x22000000)
+
 # Add patch funcs here, we'll call them in a loop in patches.py
 enemizer_patches = [
     patch_nabooru_knuckle,
-    patch_jabu_jabu_room_timer
+    patch_jabu_jabu_room_timer,
+    patch_adult_market,
 ]
