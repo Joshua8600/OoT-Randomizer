@@ -17,8 +17,8 @@ typedef Gfx* (*gen_double_tile_fn)(z64_gfx_t* gfx, int32_t tile1, uint32_t x1, u
 #define append_setup_dl_25_to_xlu ((append_setup_dl_25_to_xlu_fn)0x8007E2C0)
 #define gen_double_tile ((gen_double_tile_fn)0x8007EB84)
 
-static const colorRGBA8_t SMALL_KEY_DEFAULT_PRIM = {.hex = 0xFFFFFFFF };
-static const colorRGBA8_t SMALL_KEY_DEFAULT_ENV = { .hex = 0x3C505AFF };
+static const colorRGBA8_t SMALL_KEY_DEFAULT_PRIM = {.r = 0xFF, .g = 0xFF, .b = 0xFF, .a = 0xFF};
+static const colorRGBA8_t SMALL_KEY_DEFAULT_ENV = {.r = 0x3C, .g = 0x50, .b = 0x5A, .a = 0xFF};
 
 void draw_gi_bombchu_and_masks(z64_game_t* game, uint32_t draw_id) {
     z64_gfx_t* gfx = game->common.gfx;
