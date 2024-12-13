@@ -18,7 +18,6 @@ typedef struct
 
 typedef struct
 {
-    union {
         struct {
             union
             {
@@ -32,9 +31,6 @@ typedef struct
             };
             uint8_t a;
         };
-        uint32_t hex;
-    };
-    
 } colorRGBA8_t;
 
 typedef struct

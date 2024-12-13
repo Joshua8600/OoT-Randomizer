@@ -145,6 +145,9 @@ Fishing Game Shuffle - Shuffle the fish from the fishing game. The fish in the p
   * [4.0](#40)
 
 ## RealRob Changelog
+### v121
+  * Fix boomerang/bombchu trail corruption
+
 ### v120
   * Fix duplicate items on GUI
   * See you next year No Deku Nut November
