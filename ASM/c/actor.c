@@ -525,7 +525,7 @@ bool should_raycast(xflag_t* flag) {
         if(SKIP_RAYCAST_TABLE[i].all == 0) {
             break;
         }
-        if(SKIP_RAYCAST_TABLE[i].all == flag->all)
+        if((SKIP_RAYCAST_TABLE[i].all == flag->all) && (SKIP_RAYCAST_TABLE[i].scene == flag->scene))
             return false;
     }
     return true;
