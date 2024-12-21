@@ -145,6 +145,9 @@ Fishing Game Shuffle - Shuffle the fish from the fishing game. The fish in the p
   * [4.0](#40)
 
 ## RealRob Changelog
+### v122
+  * Fix BOTW silver rupee softlock
+
 ### v121
   * Fix boomerang/bombchu trail corruption
 
