@@ -30,7 +30,7 @@ def set_all_entrances_data(world: World) -> None:
         forward_entrance.primary = True
         if type == 'Grotto':
             forward_entrance.data['index'] = 0x1000 + forward_entrance.data['grotto_id']
-        if world.settings.decouple_entrances and type not in ('ChildBoss', 'AdultBoss'):
+        if world.settings.decouple_entrances and type not in ('ChildBoss', 'AdultBoss', 'SpecialBoss'):
             forward_entrance.decoupled = True
         if return_entry:
             return_entry = return_entry[0]
@@ -40,7 +40,7 @@ def set_all_entrances_data(world: World) -> None:
             forward_entrance.bind_two_way(return_entrance)
             if type == 'Grotto':
                 return_entrance.data['index'] = 0x2000 + return_entrance.data['grotto_id']
-            if world.settings.decouple_entrances and type not in ('ChildBoss', 'AdultBoss'):
+            if world.settings.decouple_entrances and type not in ('ChildBoss', 'AdultBoss', 'SpecialBoss'):
                 return_entrance.decoupled = True
 
 
