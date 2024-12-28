@@ -24,6 +24,8 @@
 #include "debug.h"
 #include "inputviewer.h"
 #include "message.h"
+#include "enemy_spawn_shuffle.h"
+#include "ovl_kaleidoscope.h"
 
 void Gameplay_InitSkybox(z64_game_t* globalCtx, int16_t skyboxId);
 
@@ -34,6 +36,7 @@ void c_init() {
     override_flags_init();
     models_init();
     init_textures();
+    init_new_menus();
 }
 
 void before_game_state_update() {

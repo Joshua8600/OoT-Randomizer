@@ -370,10 +370,8 @@ def color_text(gossip_text: GossipText) -> str:
 
     return text
 
-
 class HintAreaNotFound(RuntimeError):
     pass
-
 
 class HintArea(Enum):
     # internal name          prepositions        display name                  short name                color         internal dungeon name
@@ -541,7 +539,6 @@ class HintArea(Enum):
         if preposition and self.preposition(clearer_hints) is not None:
             text = f'{self.preposition(clearer_hints)} {text}'
         return text
-
 
 def get_woth_hint(spoiler: Spoiler, world: World, checked: set[str]) -> HintReturn:
     locations = spoiler.required_locations[world.id]
