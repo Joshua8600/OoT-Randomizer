@@ -56,7 +56,7 @@ const uint8_t REQUIRED_PENDING_FRAMES = 6;
 uint16_t xflag_scene_table[101];
 uint8_t xflag_room_table[1000];
 uint8_t xflag_room_blob[3000];
-alt_override_t alt_overrides[200];
+alt_override_t alt_overrides[500];
 
 extern uint16_t CURR_ACTOR_SPAWN_INDEX;
 

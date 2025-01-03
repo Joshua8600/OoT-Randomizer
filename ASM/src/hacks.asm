@@ -4328,3 +4328,6 @@ DemoEffect_DrawJewel_AfterHook:
 .include "hacks/z_parameter.asm"
 .include "hacks/z_file_choose.asm"
 .include "hacks/ovl/ovl_kaleido_scope.asm"
+.include("hacks/ovl_en_kusa.asm")
+.include("hacks/ovl_obj_mure2.asm")
+.include("hacks/ovl_obj_hana.asm")
