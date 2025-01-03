@@ -7,6 +7,9 @@
 typedef struct {
     uint8_t silver_rupee_counts[0x16];
     bool collected_dungeon_rewards[8];
+    uint8_t has_fishing_rod;
+    uint8_t largest_fish_found[2]; // index 1 = child, index 0 = adult
+    uint8_t has_loach;
     override_t incoming_queue[3];
     uint8_t password[6];
 } extended_savecontext_static_t __attribute__ ((aligned (8)));

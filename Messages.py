@@ -291,6 +291,15 @@ ITEM_MESSAGES: list[tuple[int, str]] = [
     (0x90B3, "\x08\x13\x58You got \x05\x41Deku Seeds\x05\x40!\x01Use these as bullets\x01for your Slingshot."),
     (0x90B4, "\x08You found a \x05\x41fairy\x05\x40!\x01Your health has been restored!"),
     (0x90B5, "\x08You found \x05\x43literally nothing\x05\x40!"),
+    
+    (0x9500, "\x08You found a \x05\x41Fishing Rod\x05\x40!"),
+    (0x9501, "\x08You found a \x05\x41Fish (Child 6lb)\x05\x40!"),
+    (0x9502, "\x08You found a \x05\x41Fish (Child 8lb)\x05\x40!"),
+    (0x9503, "\x08WHAT A LUNKER!\x01You found a \x05\x41Fish (Child 10lb)\x05\x40!"),
+    (0x9504, "\x08You found a \x05\x41Fish (Adult 10lb)\x05\x40!"),
+    (0x9505, "\x08You found a \x05\x41Fish (Adult 12lb)\x05\x40!"),
+    (0x9506, "\x08WHAT A LUNKER!\x01You found a \x05\x41Fish (Adult 16lb)\x05\x40!"),
+    (0x9507, "\x08You found a \x05\x41Hylian Loach\x05\x40!"),
 ]
 
 KEYSANITY_MESSAGES: list[tuple[int, str]] = [
@@ -1157,6 +1166,13 @@ def add_item_messages(messages: list[Message], shop_items: Iterable[ShopItem], w
     move_shop_item_messages(messages, shop_items)
     update_item_messages(messages, world)
 
+
+def find_message_index(messages: list[Message], id):
+    
+    for i in range(0, len(messages)):
+        if messages[i].id == id:
+            return i
+    return -1
 
 # reads each of the game's messages into a list of Message objects
 def read_messages(rom: Rom) -> list[Message]:

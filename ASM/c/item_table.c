@@ -347,6 +347,15 @@ item_row_t item_table[GI_RANDO_MAX] = {
     [GI_WATER_MEDALLION]                                        = ITEM_ROW(0x53,      GILDED_CHEST, 0x41, -1, 0x003D, 0x01B1, 0x98, no_upgrade, give_quest_item,  2, -1, NULL), // Water Medallion
     [GI_SHADOW_MEDALLION]                                       = ITEM_ROW(0x53,      GILDED_CHEST, 0x41, -1, 0x0041, 0x01B2, 0x99, no_upgrade, give_quest_item,  4, -1, NULL), // Shadow Medallion
     [GI_SPIRIT_MEDALLION]                                       = ITEM_ROW(0x53,      GILDED_CHEST, 0x41, -1, 0x003F, 0x01B3, 0x9A, no_upgrade, give_quest_item,  3, -1, NULL), // Spirit Medallion
+
+    [GI_FISHING_ROD]                                            = ITEM_ROW(0x53,      GILDED_CHEST, 0x41, -1, 0x9500, 0x01B7, 0xA3, no_upgrade, give_fishing_rod, -1, -1, NULL), // Fishing Rod
+    [GI_FISH_CHILD_6LB]                                         = ITEM_ROW(0x53,       BROWN_CHEST, 0x41, -1, 0x9501, 0x01B8, 0xA4, no_upgrade, give_fish,        6, 1, NULL), // Fish (child, 6 lb)
+    [GI_FISH_CHILD_8LB]                                         = ITEM_ROW(0x53,       BROWN_CHEST, 0x41, -1, 0x9502, 0x01B8, 0xA4, no_upgrade, give_fish,        8, 1, NULL), // Fish (child, 8 lb)
+    [GI_FISH_CHILD_10LB]                                        = ITEM_ROW(0x53,      GILDED_CHEST, 0x41, -1, 0x9503, 0x01B8, 0xA4, no_upgrade, give_fish,        10, 1, NULL), // Fish (child, 10 lb)
+    [GI_FISH_ADULT_10LB]                                        = ITEM_ROW(0x53,       BROWN_CHEST, 0x41, -1, 0x9504, 0x01B8, 0xA4, no_upgrade, give_fish,        10, 0, NULL), // Fish (adult, 10 lb)
+    [GI_FISH_ADULT_12LB]                                        = ITEM_ROW(0x53,       BROWN_CHEST, 0x41, -1, 0x9505, 0x01B8, 0xA4, no_upgrade, give_fish,        12, 0, NULL), // Fish (adult, 12 lb)
+    [GI_FISH_ADULT_16LB]                                        = ITEM_ROW(0x53,      GILDED_CHEST, 0x41, -1, 0x9506, 0x01B8, 0xA4, no_upgrade, give_fish,        16, 0, NULL), // Fish (adult, 16 lb)
+    [GI_FISH_LOACH]                                             = ITEM_ROW(0x53,      GILDED_CHEST, 0x41, -1, 0x9507, 0x01B8, 0xA4, no_upgrade, give_fish,        30, 0, NULL), // Hylian Loach
 };
 
 /*  Determine which message to display based on the number of silver rupees collected.

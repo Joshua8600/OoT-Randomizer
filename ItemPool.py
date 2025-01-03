@@ -533,6 +533,10 @@ def get_pool_core(world: World) -> tuple[list[str], dict[str, Item]]:
             pending_junk_pool.extend(song_list)
         if world.settings.shuffle_individual_ocarina_notes:
             pending_junk_pool.extend(['Ocarina A Button', 'Ocarina C up Button', 'Ocarina C left Button', 'Ocarina C down Button', 'Ocarina C right Button'])
+        if world.settings.shuffle_fishies:
+            pending_junk_pool.append('Fishing Rod')
+            pending_junk_pool.append('Fish (Child 10 lb)')
+            pending_junk_pool.append('Fish (Adult 16 lb)')
 
     if world.settings.triforce_hunt:
         pending_junk_pool.extend(['Triforce Piece'] * world.settings.triforce_count_per_world)
@@ -542,6 +546,9 @@ def get_pool_core(world: World) -> tuple[list[str], dict[str, Item]]:
         pending_junk_pool.append('Ocarina C left Button')
         pending_junk_pool.append('Ocarina C down Button')
         pending_junk_pool.append('Ocarina C right Button')
+
+    if world.settings.shuffle_fishies:
+        pending_junk_pool.append('Fishing Rod')
 
     # Use the vanilla items in the world's locations when appropriate.
     vanilla_items_processed = Counter()
@@ -660,7 +667,7 @@ def get_pool_core(world: World) -> tuple[list[str], dict[str, Item]]:
 
         # Hyrule Loach Reward
         elif location.scene == 0x49 and location.vanilla_item == 'Rupees (50)':
-            shuffle_item = world.settings.shuffle_loach_reward != 'off'
+            shuffle_item = world.settings.shuffle_loach_reward != 'off' or world.settings.shuffle_fishies
 
         # Adult Trade Quest Items
         elif location.vanilla_item in trade_items:
@@ -788,6 +795,14 @@ def get_pool_core(world: World) -> tuple[list[str], dict[str, Item]]:
         # Wonderitems
         elif location.type == 'Wonderitem':
             if world.settings.shuffle_wonderitems:
+                shuffle_item = True
+            else:
+                shuffle_item = False
+                location.disabled = DisableType.DISABLED
+
+        # Fish
+        elif location.type == 'Fish':
+            if world.settings.shuffle_fishies:
                 shuffle_item = True
             else:
                 shuffle_item = False

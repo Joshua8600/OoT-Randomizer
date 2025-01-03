@@ -56,6 +56,7 @@ void Collectible_WaitForMessageBox(EnItem00* this, z64_game_t* game);
 void reset_collectible_mutex();
 void override_flags_init();
 bool Get_NewFlag(xflag_t* flag);
+void Set_NewFlag(xflag_t* flag);
 
 extern xflag_t drop_collectible_override_flag;
 extern EnItem00* collectible_mutex;
