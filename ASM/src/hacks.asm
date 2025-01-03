@@ -850,7 +850,6 @@ Actor_Spawn_Continue_Jump_Point:
 ; Hack EnWonderItem_DropCollectible to drop flagged collectibles
 .orga 0xDE8C94
     j       EnWonderItem_DropCollectible_Hack
-    nop
 
 ; Runs when storing an incoming item to the player instance
 ; Replaces:
@@ -4174,3 +4173,4 @@ DemoEffect_DrawJewel_AfterHook:
 .include "hacks/ovl_obj_mure3.asm"
 .include "hacks/z_parameter.asm"
 .include "hacks/z_file_choose.asm"
+.include "hacks/ovl_en_gs.asm"

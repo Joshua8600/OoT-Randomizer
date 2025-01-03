@@ -792,6 +792,13 @@ def get_pool_core(world: World) -> tuple[list[str], dict[str, Item]]:
             else:
                 shuffle_item = False
                 location.disabled = DisableType.DISABLED
+        # Gossip Stones
+        elif location.type == 'GossipStone':
+            if world.settings.shuffle_gossipstones:
+                shuffle_item = True
+            else:
+                shuffle_item = False
+                location.disabled = DisableType.DISABLED
 
         # Dungeon Rewards
         elif location.name == 'ToT Reward from Rauru':
