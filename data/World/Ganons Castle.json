@@ -82,7 +82,7 @@
             "Blue Fire": "has_bottle and (is_adult or Sticks or Kokiri_Sword or has_explosives)"
         },
         "exits": {
-            "Ganons Castle Water Trial Block Push": "Blue_Fire and can_kill_freezard"
+            "Ganons Castle Water Trial Block Push": "can_pass_boulder('IGC_WATER_TRIAL_BOULDER_1') and can_kill_freezard"
         }
     },
     {
@@ -93,7 +93,7 @@
             "Fairy Pot": "True"
         },
         "exits": {
-            "Ganons Castle Water Trial Ending": "Blue_Fire and can_use(Megaton_Hammer)"
+            "Ganons Castle Water Trial Ending": "can_pass_boulder('IGC_WATER_TRIAL_BOULDER_2') and can_use(Megaton_Hammer)"
         }
     },
     {

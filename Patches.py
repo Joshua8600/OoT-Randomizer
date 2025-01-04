@@ -36,6 +36,8 @@ from World import World
 from ntype import BigStream
 from texture_util import ci4_rgba16patch_to_ci8, rgba16_from_file, rgba16_patch
 from version import __version__
+from Boulders import patch_boulders
+from ProcessActors import get_bad_actors, process_scenes
 
 if sys.version_info >= (3, 10):
     from typing import TypeAlias
@@ -43,6 +45,8 @@ else:
     TypeAlias = str
 
 OverrideEntry: TypeAlias = "tuple[int, int, int, int, int, int]"
+FileEntry: TypeAlias = "tuple[str, int, int]"
+PatchEntry: TypeAlias = "tuple[int, list[int]]"
 
 
 def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
@@ -109,34 +113,67 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
         start_address = end_address
 
     # Make new models by applying patches to existing ones
-    zobj_patches = (
-        ('object_gi_hearts', 0x014D9000, 0x014DA590, 0x194, ( # Heart Container -> Double Defense
-            (0x1294, [0xFF, 0xCF, 0x0F]), # Exterior Primary Color
-            (0x12B4, [0xFF, 0x46, 0x32]), # Exterior Env Color
-            (0x1474, [0xFF, 0xFF, 0xFF]), # Interior Primary Color
-            (0x1494, [0xFF, 0xFF, 0xFF]), # Interior Env Color
-            (0x12A8, [0xFC, 0x17, 0x3C, 0x60, 0x15, 0x0C, 0x93, 0x7F]), # Exterior Combine Mode
-        )),
-        ('object_gi_rupy', 0x01914000, 0x01914800, 0x198, ( # Huge Rupee -> Silver Rupee
-            (0x052C, [0xAA, 0xAA, 0xAA]), # Inner Primary Color?
-            (0x0534, [0x5A, 0x5A, 0x5A]), # Inner Env Color?
-            (0x05CC, [0xFF, 0xFF, 0xFF]), # Outer Primary Color?
-            (0x05D4, [0xFF, 0xFF, 0xFF]), # Outer Env Color?
-        )),
-        ('object_gi_sutaru', 0x01858000, 0x01858650, 0x1B5, ( # Gold Skulltula Token -> Red)
-             (0x034C, [0xFF, 0x00, 0x00]), # Token primary color
-             (0x0354, [0x96, 0x00, 0x00]),
-             (0x0514, [0xFF, 0x00, 0x00]),
-             (0x051C, [0x96, 0x00, 0x00])
-         )),
-    )
+    zobj_patches: list[tuple[str, int, list[FileEntry], list[PatchEntry]]] = [
+        ('object_double_defense', 0x194, # Heart Container -> Double Defense
+            [
+                ('object_gi_hearts', 0x014D9000, 0x014DA590),
+            ],
+            [
+                (0x1294, [0xFF, 0xCF, 0x0F]), # Exterior Primary Color
+                (0x12B4, [0xFF, 0x46, 0x32]), # Exterior Env Color
+                (0x1474, [0xFF, 0xFF, 0xFF]), # Interior Primary Color
+                (0x1494, [0xFF, 0xFF, 0xFF]), # Interior Env Color
+                (0x12A8, [0xFC, 0x17, 0x3C, 0x60, 0x15, 0x0C, 0x93, 0x7F]), # Exterior Combine Mode
+            ]),
+        ('object_silver_rupee', 0x198, # Huge Rupee -> Silver Rupee
+            [
+                ('object_gi_rupy', 0x01914000, 0x01914800),
+            ],
+            [
+                (0x052C, [0xAA, 0xAA, 0xAA]), # Inner Primary Color?
+                (0x0534, [0x5A, 0x5A, 0x5A]), # Inner Env Color?
+                (0x05CC, [0xFF, 0xFF, 0xFF]), # Outer Primary Color?
+                (0x05D4, [0xFF, 0xFF, 0xFF]), # Outer Env Color?
+            ]),
+        ('object_soul', 0x1B5, # Gold Skulltula Token -> Soul Token)
+            [
+                ('object_gi_sutaru', 0x01858000, 0x01858650),
+            ],
+            [
+                (0x034C, [0xFF, 0x00, 0x00]), # Token primary color
+                (0x0354, [0x96, 0x00, 0x00]),
+                (0x0514, [0xFF, 0x00, 0x00]),
+                (0x051C, [0x96, 0x00, 0x00])
+            ]),
+        ('object_silver_rock', 0x1B6,
+            [
+                ('gameplay_field_keep', 0x00F689D0, 0x00F689F0), # silver_rock_tlut offset 0x0000
+                ('gameplay_field_keep', 0x00F689F8, 0x00F691F8), # silver_rock_texture offset 0x0020
+                ('gameplay_field_keep', 0x00F691F8, 0x00F693B8), # silver_rock_vertices offset 0x0820
+                ('gameplay_field_keep', 0x00F693B8, 0x00F694C8), # silver_rock_dlist offset 0x09E0
+                ('gameplay_field_keep', 0x00F694C8, 0x00F695E8), # fragments_vertices offset 0x0AF0
+                ('gameplay_field_keep', 0x00F695E8, 0x00F696C8), # fragments_dlist offset 0x0C10
+            ],
+            [
+                (0x09FC, [0x06, 0x00, 0x00, 0x20]), # gsDPSetTextureImage(..., silver_rock_texture)
+                (0x0A34, [0x06, 0x00, 0x00, 0x00]), # gsDPSetTextureImage(..., silver_rock_tlut)
+                (0x0A84, [0x06, 0x00, 0x08, 0x20]), # gsSPVertex(..., silver_rock_vertices)
+                (0x0C2C, [0x06, 0x00, 0x00, 0x20]), # gsDPSetTextureImage(..., silver_rock_texture)
+                (0x0C64, [0x06, 0x00, 0x00, 0x00]), # gsDPSetTextureImage(..., silver_rock_tlut)
+                (0x0CB4, [0x06, 0x00, 0x0A, 0xF0]), # gsSPVertex(..., fragments_vertices)
+            ]),
+    ]
 
     # Add the new models to the extended object file.
-    for name, start, end, object_id, patches in zobj_patches:
-        end_address = start_address + end - start
-        rom.buffer[start_address:end_address] = rom.buffer[start:end]
+    for name, object_id, file_entries, patch_entries in zobj_patches:
+        # Combine file entries into a single file
+        assert all(end > start for (_name, start, end) in file_entries)
+        end_address = start_address + sum(end - start for (_name, start, end) in file_entries)
+        buffers = [rom.buffer[start:end] for (_name, start, end) in file_entries]
+        rom.buffer[start_address:end_address] = bytearray(itertools.chain(*buffers))
         # Apply patches
-        for offset, patch in patches:
+        for offset, patch in patch_entries:
+            assert start_address + offset < end_address
             rom.write_bytes(start_address + offset, patch)
         # Add it to the extended object table
         add_to_extended_object_table(rom, object_id, start_address, end_address)
@@ -819,7 +856,7 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
         rom.write_int32(0xE2886C, 0x95CEB4B0)  # lhu
         rom.write_int32(0xE28870, 0x31CE0080)  # andi
 
-        remove_entrance_blockers(rom)
+        remove_entrance_blockers(world, rom)
 
         # Purge temp flags on entrance to spirit from colossus through the front door.
         rom.write_byte(0x021862E3, 0xC2)
@@ -2170,17 +2207,47 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
             if mask_segment_id not in (0x05, 0x06, 0x07, 0x0F, 0x15, 0x1C):
                 rom.write_int16s(0x00B66E60 + mask_segment_id * 0x12, [0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000])
 
-    if world.settings.fix_broken_drops:
-        symbol = rom.sym('FIX_BROKEN_DROPS')
-        rom.write_byte(symbol, 0x01)
+    if not world.settings.fix_broken_actors:
+        scene_data = process_scenes(rom)
+        # Because we have our new object system, we actually need to patch out the actors if the setting is disabled
+        bad_actors = get_bad_actors(rom, scene_data)
+        for (actor, scene_name,scene_id, room_id, setup, actor_index, actor_type, object) in bad_actors:
+            rom.write_int16(actor, 0xFFFF)
 
-        # Autocollect incoming_item_id for magic jars are swapped in vanilla code
-        rom.write_int16(0xA88066, 0x0044)  # Change GI_MAGIC_JAR_SMALL to GI_MAGIC_JAR_LARGE
-        rom.write_int16(0xA88072, 0x0043)  # Change GI_MAGIC_JAR_LARGE to GI_MAGIC_JAR_SMALL
-    else:
+        # And we need to fix the spirit temple shield pot to not drop anything
         # Remove deku shield drop from spirit pot because it's "vanilla behavior"
         # Replace actor parameters in scene 06, room 27 actor list
-        rom.write_int16(0x2BDC0C6, 0x603F)
+        if not world.dungeon_mq['Spirit Temple']:
+            spirit_shield_pot = scene_data[6].rooms[27].setups[0].actors[7]
+            rom.write_int16(spirit_shield_pot.addr + 14, 0x603F)
+
+    broken_actors_cfg = 0x00
+    broken_actors_symbol = rom.sym('CFG_OBJECT_SYSTEM')
+    if world.settings.fix_broken_actors:
+        broken_actors_cfg |= 0x81
+        # Autocollect incoming_item_id for magic jars are swapped in vanilla code
+        rom.write_int16(0xA88066, 0x0044)  # Change GI_MAGIC_SMALL to GI_MAGIC_LARGE
+        rom.write_int16(0xA88072, 0x0043)  # Change GI_MAGIC_LARGE to GI_MAGIC_SMALL
+
+        if world.settings.dogs_anywhere:
+            broken_actors_cfg |= 0x02
+
+    if world.settings.shuffle_boulders or world.distribution.boulders:
+        broken_actors_cfg |= 0x80
+        rom.write_byte(rom.sym('CFG_BOULDER_SHUFFLE'), 1)
+        patch_boulders(world.boulders_by_id, rom)
+
+        # Update brown bombable boulders to use collider for explosion detection instead of fixed distance
+        # Hack in ObjBombiwa_Update at 0x80a8388c, ROM 
+        # Replaces:
+        # jal 0x8002650C
+        # or a1, s0, r0
+        # with
+        # jal 0x800264c8 (the explosion collision detection function)
+        # addiu a1, s0, 0x13c (passes the boulder's collider in a1 instead of the boulder itself)
+        rom.write_bytes(0xE061CC, [0x0c, 0x00, 0x99, 0x32, 0x26, 0x05, 0x01, 0x3c])
+
+    rom.write_byte(broken_actors_symbol, broken_actors_cfg)
 
     # Have the Gold Skulltula Count in the pause menu turn red when equal to the
     # available number of skulls in the world instead of 100.
@@ -2547,9 +2614,9 @@ def get_override_itemid(override_table: Iterable[OverrideEntry], scene: int, typ
     return None
 
 
-def remove_entrance_blockers(rom: Rom) -> None:
+def remove_entrance_blockers(world: World, rom: Rom) -> None:
     def remove_entrance_blockers_do(rom: Rom, actor_id: int, actor: int, scene: int) -> None:
-        if actor_id == 0x014E and scene == 97:
+        if (not world.settings.shuffle_boulders) and actor_id == 0x014E and scene == 97:
             actor_var = rom.read_int16(actor + 14)
             if actor_var == 0xFF01:
                 rom.write_int16(actor + 14, 0x0700)

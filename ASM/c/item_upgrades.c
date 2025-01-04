@@ -187,7 +187,7 @@ uint16_t upgrade_key_model(z64_file_t* save, override_t override) {
     if (item_id == GI_DOOR_KEY && !SHUFFLE_CHEST_GAME && TCG_REQUIRES_LENS
         && override.value.base.player == PLAYER_ID
         && save->items[Z64_SLOT_LENS] != Z64_ITEM_LENS
-        && z64_game.room_index != 0
+        && z64_game.room_ctx.curRoom.num != 0
     ) {
         return GI_RUPEE_GREEN_LOSE; // Green Rupee (Chest Game)
     }

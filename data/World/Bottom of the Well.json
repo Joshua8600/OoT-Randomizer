@@ -61,13 +61,21 @@
             "Stick Pot": "True",
             "Nut Pot": "True"
         },
+        "events": {
+            # Only the left boulder (BOULDER_2) breaks when blowing up the bomb flowers using dins or the stick trick
+            "Bottom of the Well Boulders Near Bomb Flowers Destroyed": "
+                can_pass_boulder('BOTW_BOMB_FLOWER_BOULDER_1') or can_pass_boulder('BOTW_BOMB_FLOWER_BOULDER_2') or
+                ((boulder_type('BOTW_BOMB_FLOWER_BOULDER_1') == BOULDER_TYPE_BROWN) and (at('Bottom of the Well Behind Locked Doors', True) and Progressive_Strength_Upgrade)) or
+                ((boulder_type('BOTW_BOMB_FLOWER_BOULDER_2') == BOULDER_TYPE_BROWN) and (at('Bottom of the Well Behind Locked Doors', True) and Progressive_Strength_Upgrade) or can_use(Dins_Fire) or (logic_botw_basement and Sticks))
+            "
+        },
         "exits": {
             "Bottom of the Well Left Side": "(Silver_Rupee_Bottom_of_the_Well_Basement, 5)",
             "Bottom of the Well Underwater": "can_play(Zeldas_Lullaby)",
             "Bottom of the Well Near Map Chest": "
-                has_explosives or
-                (Progressive_Strength_Upgrade and
-                    (can_use(Dins_Fire) or (logic_botw_basement and Sticks)))",
+                can_pass_boulder('BOTW_CHEST_BOULDER_1') or can_pass_boulder('BOTW_CHEST_BOULDER_2') or 
+                ((boulder_type('BOTW_CHEST_BOULDER_1') == BOULDER_TYPE_BROWN or boulder_type('BOTW_CHEST_BOULDER_2') == BOULDER_TYPE_BROWN) and
+                (Progressive_Strength_Upgrade and Bottom_of_the_Well_Boulders_Near_Bomb_Flowers_Destroyed))",
             "Bottom of the Well Behind Fake Walls": "logic_lens_botw or can_use(Lens_of_Truth)"
         }
     },
@@ -153,9 +161,6 @@
             "Bottom of the Well GS West Inner Room": "Boomerang",
             "Bottom of the Well GS East Inner Room": "Boomerang",
             "Bottom of the Well GS Like Like Cage": "Boomerang"
-        },
-        "exits": {
-            "Bottom of the Well Near Map Chest": "Progressive_Strength_Upgrade"
         }
     }
 ]

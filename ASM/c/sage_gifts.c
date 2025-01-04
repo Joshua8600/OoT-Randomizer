@@ -29,7 +29,7 @@ void give_sage_gifts() {
     if (
         z64_file.game_mode == 0 // normal gameplay
         && z64_game.scene_index == 0x0043 // current scene: Temple of Time
-        && z64_game.room_index == 0x00 // current room: Master Sword chamber
+        && z64_game.room_ctx.curRoom.num == 0x00 // current room: Master Sword chamber
         && !(z64_file.event_chk_inf[4] & 0x0020) // flag not already set
     ) {
         push_delayed_item(0x04);

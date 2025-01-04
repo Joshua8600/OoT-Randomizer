@@ -8,6 +8,7 @@ from collections import defaultdict
 from collections.abc import Callable, Iterable, Sequence
 from functools import reduce
 from typing import TYPE_CHECKING, Any, Optional
+from Boulders import BOULDER_TYPE
 
 import StartingItems
 from Entrance import Entrance
@@ -49,6 +50,7 @@ per_world_keys = (
     ':goal_locations',
     ':barren_regions',
     'gossip_stones',
+    'boulders'
 )
 
 
@@ -273,6 +275,7 @@ class WorldDistribution:
         self.goal_locations: Optional[dict[str, dict[str, dict[str, LocationRecord | dict[str, LocationRecord]]]]] = None
         self.barren_regions: Optional[list[str]] = None
         self.gossip_stones: Optional[dict[str, GossipRecord]] = None
+        self.boulders: Optional[dict[str, BOULDER_TYPE]] = {}
 
         self.distribution: Distribution = distribution
         self.id: int = id
@@ -300,6 +303,7 @@ class WorldDistribution:
             'goal_locations': None,
             'barren_regions': None,
             'gossip_stones': {name: [GossipRecord(rec) for rec in record] if is_pattern(name) else GossipRecord(record) for (name, record) in src_dict.get('gossip_stones', {}).items()},
+            'boulders': {name: BOULDER_TYPE[record] for (name, record) in src_dict.get('boulders', {}).items()},
         }
 
         if update_all:
@@ -332,6 +336,7 @@ class WorldDistribution:
             ':goal_locations': self.goal_locations,
             ':barren_regions': self.barren_regions,
             'gossip_stones': SortedDict({name: [rec.to_json() for rec in record] if is_pattern(name) else record.to_json() for (name, record) in self.gossip_stones.items()}),
+            'boulders': {boulder:str(self.boulders[boulder]) for boulder in self.boulders}
         }
 
     def __str__(self) -> str:
@@ -1256,15 +1261,18 @@ class Distribution:
         for itemsetting in starting_items:
             if itemsetting in StartingItems.everything:
                 item = StartingItems.everything[itemsetting]
+                item_name = item.item_name
+                if(item_name == "Ice Arrows" and self.settings.blue_fire_arrows):
+                    item_name = "Blue Fire Arrows"
                 if not item.special:
-                    add_starting_item_with_ammo(data, item.item_name)
+                    add_starting_item_with_ammo(data, item_name)
                 else:
-                    if item.item_name == 'Rutos Letter' and self.settings.zora_fountain != 'open':
+                    if item_name == 'Rutos Letter' and self.settings.zora_fountain != 'open':
                         data['Rutos Letter'].count += 1
-                    elif item.item_name in ('Bottle', 'Rutos Letter'):
+                    elif item_name in ('Bottle', 'Rutos Letter'):
                         data['Bottle'].count += 1
                     else:
-                        raise KeyError("invalid special item: {}".format(item.item_name))
+                        raise KeyError("invalid special item: {}".format(item_name))
             else:
                 raise KeyError("invalid starting item: {}".format(itemsetting))
         self.settings.starting_equipment = []
@@ -1353,6 +1361,7 @@ class Distribution:
 
         for world in spoiler.worlds:
             world_dist = self.world_dists[world.id]
+            world_dist.boulders = world.boulders
             world_dist.randomized_settings = {randomized_item: getattr(world.settings, randomized_item) for randomized_item in world.randomized_list}
             world_dist.dungeons = {dung: DungeonRecord({ 'mq': world.dungeon_mq[dung] }) for dung in world.dungeon_mq}
             world_dist.empty_dungeons = {dung: EmptyDungeonRecord({ 'empty': world.empty_dungeons[dung].empty }) for dung in world.empty_dungeons}

@@ -3,8 +3,9 @@ from collections.abc import Iterable
 from typing import TYPE_CHECKING, Optional, Any
 
 from Item import Item, ItemInfo
-from RulesCommon import escape_name
 from Location import Location
+from RulesCommon import AccessRule, escape_name
+from Boulders import BOULDER_TYPE
 
 if TYPE_CHECKING:
     from Goals import GoalCategory, Goal
@@ -25,11 +26,18 @@ Ocarina_C_up_Button: int = ItemInfo.solver_ids['Ocarina_C_up_Button']
 Ocarina_C_down_Button: int = ItemInfo.solver_ids['Ocarina_C_down_Button']
 Ocarina_C_right_Button: int = ItemInfo.solver_ids['Ocarina_C_right_Button']
 
+Megaton_Hammer: int = ItemInfo.solver_ids['Megaton_Hammer']
+Progressive_Strength_Upgrade: int = ItemInfo.solver_ids['Progressive_Strength_Upgrade']
+Bomb_Bag: int = ItemInfo.solver_ids['Bomb_Bag']
+
 class State:
     def __init__(self, parent: World) -> None:
         self.solv_items: list[int] = [0] * len(ItemInfo.solver_ids)
         self.world: World = parent
         self.search: Optional[Search] = None
+
+        self.can_blast_or_smash: AccessRule = self.world.parser.parse_rule("can_blast_or_smash")
+        self.Blue_Fire: AccessRule = self.world.parser.parse_rule("Blue_Fire")
 
     def copy(self, new_world: Optional[World] = None) -> State:
         new_world = new_world if new_world else self.world
@@ -243,3 +251,35 @@ class State:
                 for event in self.world.event_items
                 if self.solv_items[ItemInfo.solver_ids[event]]},
         }
+
+    def boulder_type(self, boulder: str, **kwargs) -> BOULDER_TYPE:
+        return self.world.boulders[boulder]
+
+    def can_pass_boulder(self, boulder: str, age: str, **kwargs) -> bool:
+        type: BOULDER_TYPE = self.world.boulders[boulder]
+        return self.can_pass_boulder_type(type, age, kwargs=kwargs)
+
+    def can_pass_boulder_type(self, boulder_type:BOULDER_TYPE, age: str, **kwargs) -> bool:
+        if boulder_type == BOULDER_TYPE.BRONZE:
+            # Check for hammer and adult
+            return age == 'adult' and self.has(Megaton_Hammer)
+        elif boulder_type == BOULDER_TYPE.SILVER:
+            # Check for adult+str2
+            return age == 'adult' and self.has(Progressive_Strength_Upgrade, 2)
+        elif boulder_type == BOULDER_TYPE.BROWN:
+            # Check for adult+hammer or explosives
+            return self.can_blast_or_smash(self, age=age)
+        elif boulder_type == BOULDER_TYPE.RED_ICE:
+            # Check for blue fire
+            #return self.world.parser.parse_rule('Blue_Fire')(self, age=age)
+            return self.Blue_Fire(self, age=age)
+        
+        # Should never get here
+        return False
+
+    # Check if the current state can pass a particular boulder, restricted to a list of types
+    def can_pass_boulder_types(self, boulder: str, types: list[BOULDER_TYPE], age: str, **kwargs) -> bool:
+        this_boulder_type: BOULDER_TYPE = self.world.boulders[boulder] # Get the boulder's type
+        if this_boulder_type in types: # Check if that type is in the list of allowed types
+            return self.can_pass_boulder_type(this_boulder_type, age, kwargs=kwargs) # Check ability to pass that type
+        return False

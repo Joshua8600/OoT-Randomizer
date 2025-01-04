@@ -5,7 +5,11 @@
 #include "get_items.h"
 #include <stdbool.h>
 #include <stdint.h>
-#include "get_items.h"
+
+typedef enum {
+    #include "actor_table.h"
+    /* 0x0192 */ ACTOR_ID_MAX // originally "ACTOR_DLF_MAX"
+} ActorID;
 
 // New data added to the end of every actor.
 // Make sure the size of this struct is equal to the amount of space added added in Actor_Spawn_Malloc_Hack from actor.asm
@@ -27,5 +31,4 @@ ActorAdditionalData* Actor_GetAdditionalData(z64_actor_t* actor);
 override_t get_newflag_override(xflag_t* flag);
 extern ActorOverlay gActorOverlayTable[];
 void* Actor_ResolveOverlayAddr(z64_actor_t* actor, void* addr);
-
 #endif

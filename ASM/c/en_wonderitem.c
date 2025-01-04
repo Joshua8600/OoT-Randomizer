@@ -19,9 +19,10 @@ static z64_xyzf_t sEffectAccel = { 0.0f, 0.5f, 0.0f };
 
 extern uint16_t CURR_ACTOR_SPAWN_INDEX;
 
-void EnWonderitem_AfterInitHack(z64_actor_t* this, z64_game_t* globalCtx) {
-    if (this->main_proc == NULL) return;
-    if (this->actor_id != 0x112) return;
+void EnWonderitem_AfterInitHack(z64_actor_t* this, z64_game_t* globalCtx)
+{
+    if(this->update == NULL) return;
+    if(this->actor_id != 0x112) return;
 
     EnWonderItem* wonderitem = (EnWonderItem*)this;
     wonderitem->overridden = 0;

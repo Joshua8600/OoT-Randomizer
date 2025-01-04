@@ -140,6 +140,9 @@ RANDO_CONTEXT:
 .include "bg_gate_shutter.asm"
 .include "enemy_spawn_shuffle.asm"
 .include "minimap.asm"
+.include "collider_override.asm"
+.include "objects.asm"
+
 
 .align 0x10
 .importobj "../build/bundle.o"

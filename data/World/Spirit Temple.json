@@ -97,7 +97,7 @@
             "Spirit Temple Child Anubis Pot 3": "True",
             "Spirit Temple Child Anubis Pot 4": "True",
             "Spirit Temple Child Anubis": "has_soul(Anubis)",
-            "Deku Shield Pot": "fix_broken_drops"
+            "Deku Shield Pot": "fix_broken_actors"
         },
         "exits": {
             "Child Spirit Temple Beyond Right Bridge": "has_soul(Anubis)",

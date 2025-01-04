@@ -243,7 +243,7 @@ Gameplay_InitSkybox:
 
     li      at, 0x117A4 //object table
     addu    a0, a0, at
-    jal     0x80081628          //check if object file is loaded
+    jal     Object_GetIndex          //check if object file is loaded. This calls the original version instead of the hooked one.
     addiu   a1, r0, 0x02        //gameplay_field_keep
     b       @return_check_if_object_loaded
     nop
@@ -915,6 +915,10 @@ Actor_Spawn_Continue_Jump_Point:
     j       Actor_SpawnEntry_Hack
     nop
 
+; Hack Actor_Spawn to load unloaded objects
+;.orga 0xA9B1B4; In memory: 0x80025254
+;    jal     object_getindex_or_spawn_extended
+
 .orga 0xA99C98 ; In memory: 0x80023D38
     jal     Player_SpawnEntry_Hack
 
@@ -1149,12 +1153,12 @@ Actor_Spawn_Continue_Jump_Point:
 .endarea
 
 ;Hack to EnItem00_Init to spawn deku shield, hylian shield, and tunic objects
-.orga 0xA87DC8 ;In memory 0x80011E68
-    jal object_index_or_spawn ;Replace call to z64_ObjectIndex
-.orga 0xA87E24 ;In memory 0x80011EC4
-    jal object_index_or_spawn ;Replace call to z64_ObjectIndex
-.orga 0xA87E80 ;In memory 0x80011F20
-    jal object_index_or_spawn ;Replace call to z64_ObjectIndex
+;.orga 0xA87DC8 ;In memory 0x80011E68
+;    jal object_index_or_spawn ;Replace call to z64_ObjectIndex
+;.orga 0xA87E24 ;In memory 0x80011EC4
+;    jal object_index_or_spawn ;Replace call to z64_ObjectIndex
+;.orga 0xA87E80 ;In memory 0x80011F20
+;    jal object_index_or_spawn ;Replace call to z64_ObjectIndex
 
 ; Fix autocollect magic jar wonder items
 ; Replaces:
@@ -2619,6 +2623,19 @@ skip_bombchu_bowling_prize_switch:
     subu    t7, r0, a2
     lw      ra, 0x0C (sp)
 
+; extends object table lookup for calls to object_index_or_spawn
+
+.headersize (0x800110A0 - 0xA87000)
+.org 0x8008130C
+; Replaces:
+;   lui     t2, 0x8010
+;   multu   t7, v1
+;   addiu   t2, t2, 0x8FF8
+    multu   t7, v1
+    jal     extended_object_lookup_objectspawn
+    nop
+.headersize(0)
+
 ; extends object table lookup for shop item load
 .orga 0xAF74F8
     sw      ra, 0x44 (sp)
@@ -3231,18 +3248,6 @@ courtyard_guards_kill:
     sw      t9, 0x0000(s1)
     lhu     t4, 0x0252(s7)
     move    at, v0
-
-;==================================================================================================
-; King Zora Init Moved Check Override
-;==================================================================================================
-; Replaces: lhu     t0, 0x0EDA(v0)
-;           or      a0, s0, zero
-;           andi    t1, t0, 0x0008
-
-.orga 0xE565D0
-    jal     kz_moved_check
-    nop
-    or      a0, s0, zero
 
 ; ==================================================================================================
 ; HUD Button Colors
@@ -4334,3 +4339,7 @@ DemoEffect_DrawJewel_AfterHook:
 .include("hacks/ovl_obj_hana.asm")
 .include("hacks/ovl_fishing.asm")
 .include "hacks/ovl_en_gs.asm"
+.include("hacks/ovl_en_ishi.asm")
+.include("hacks/ovl_obj_hamishi.asm")
+.include("hacks/code.asm")
+.include("hacks/object_fixes.asm")
