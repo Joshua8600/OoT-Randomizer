@@ -175,7 +175,9 @@ item_draw_table_entry_t item_draw_table[] = {
     [0x9D] = { draw_gi_fairy,               { 0x06000EF0 } }, // Fairy (not in a bottle but uses the fairy from the bottle)
     [0x9E] = { draw_gi_nothing,             {} },
     [0x9F] = { draw_gi_magic_meter,         { 0x06000000, 0x06000670, 0x00CE00FF, 0xFFFFFFFF, 0x000000FF  } },  // Magic Meter
-    };
+    [0xA2] = { draw_gi_various_opa0,        { 0x06001140 }}, // Fishie rod
+    [0xA3] = { draw_gi_various_opa0,        { 0x06001160 }} // Fishie
+};
 
 void base_draw_gi_model(z64_game_t* game, uint32_t draw_id) {
     item_draw_table[draw_id].draw_func(game, draw_id);

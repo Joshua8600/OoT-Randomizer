@@ -33,6 +33,8 @@ extern uint8_t KEYRING_BOSSKEY_CONDITION;
 void unlock_ocarina_note(z64_file_t *save, int16_t arg1, int16_t arg2);
 void give_enemy_soul(z64_file_t *save, int16_t arg1, int16_t arg2);
 void give_regional_enemy_soul(z64_file_t *save, int16_t arg1, int16_t arg2);
+void give_fishing_rod(z64_file_t* save, int16_t arg1, int16_t arg2);
+void give_fish(z64_file_t* save, int16_t weight, int16_t age);
 
 typedef enum dungeon {
     DEKU_ID       = 0,

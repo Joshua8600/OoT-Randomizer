@@ -5,6 +5,7 @@
 #include "get_items.h"
 #include <stdbool.h>
 #include <stdint.h>
+#include "get_items.h"
 
 // New data added to the end of every actor.
 // Make sure the size of this struct is equal to the amount of space added added in Actor_Spawn_Malloc_Hack from actor.asm

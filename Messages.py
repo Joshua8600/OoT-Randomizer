@@ -361,6 +361,15 @@ ITEM_MESSAGES: list[tuple[int, str]] = [
     (0x9342, "\x08You found the \x05\x41Zora Region Enemy Souls\x05\x40!"),
     (0x9343, "\x08You found the \x05\x41Lon Lon Ranch Enemy Souls\x05\x40!"),
     (0x9344, "\x08You found the \x05\x41Grotto Enemy Souls\x05\x40!"),
+    
+    (0x9500, "\x08You found a \x05\x41Fishing Rod\x05\x40!"),
+    (0x9501, "\x08You found a \x05\x41Fish (Child 6lb)\x05\x40!"),
+    (0x9502, "\x08You found a \x05\x41Fish (Child 8lb)\x05\x40!"),
+    (0x9503, "\x08WHAT A LUNKER!\x01You found a \x05\x41Fish (Child 10lb)\x05\x40!"),
+    (0x9504, "\x08You found a \x05\x41Fish (Adult 10lb)\x05\x40!"),
+    (0x9505, "\x08You found a \x05\x41Fish (Adult 12lb)\x05\x40!"),
+    (0x9506, "\x08WHAT A LUNKER!\x01You found a \x05\x41Fish (Adult 16lb)\x05\x40!"),
+    (0x9507, "\x08You found a \x05\x41Hylian Loach\x05\x40!"),
 ]
 
 KEYSANITY_MESSAGES: list[tuple[int, str]] = [
@@ -1227,6 +1236,13 @@ def add_item_messages(messages: list[Message], shop_items: Iterable[ShopItem], w
     move_shop_item_messages(messages, shop_items)
     update_item_messages(messages, world)
 
+
+def find_message_index(messages: list[Message], id):
+    
+    for i in range(0, len(messages)):
+        if messages[i].id == id:
+            return i
+    return -1
 
 # reads each of the game's messages into a list of Message objects
 def read_messages(rom: Rom) -> list[Message]:

@@ -9,6 +9,9 @@ typedef struct {
     bool collected_dungeon_rewards[8];
     uint8_t enemy_spawn_flags[8];
     uint8_t soul_enable_flags[8];
+    uint8_t has_fishing_rod;
+    uint8_t largest_fish_found[2]; // index 1 = child, index 0 = adult
+    uint8_t has_loach;
     uint8_t password[6];
     override_t incoming_queue[3]; // Keep these at the end so it doesn't screw up anything which we defined in SaveContext.py
 

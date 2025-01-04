@@ -413,10 +413,19 @@ typedef enum GetItemID {
     /* 0x0173 */ GI_SOUL_REGIONAL_LLR,
     /* 0x0174 */ GI_SOUL_REGIONAL_GROTTOS,
 
-    /* 0x0175 */ GI_RANDO_MAX
+    GI_FISHING_ROD,
+    GI_FISH_CHILD_6LB,
+    GI_FISH_CHILD_8LB,
+    GI_FISH_CHILD_10LB,
+    GI_FISH_ADULT_10LB,
+    GI_FISH_ADULT_12LB,
+    GI_FISH_ADULT_16LB,
+    GI_FISH_LOACH,
+
+    /* 0x024D */ GI_RANDO_MAX
 } GetItemId;
 
-_Static_assert(GI_RANDO_MAX == 0x0245, "Remember to update the comment and the assert for the value of GI_RANDO_MAX when adding new items");
+_Static_assert(GI_RANDO_MAX == 0x024D, "Remember to update the comment and the assert for the value of GI_RANDO_MAX when adding new items");
 
 typedef enum {
     /*  0 */ BROWN_CHEST,            // big default chest
