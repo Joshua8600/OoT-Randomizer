@@ -981,6 +981,7 @@ Actor_Spawn_Continue_Jump_Point:
 .orga 0xDE8C94
     j       EnWonderItem_DropCollectible_Hack
     nop
+
 ; Hack Actor_RemoveFromCategory to prevent setting the room clear flag if the room has unspawned enemies from enemy spawn shuffle
 .orga 0xA9AFEC ; In memory: 0x8002508C
 ; Replaces:
@@ -4332,3 +4333,4 @@ DemoEffect_DrawJewel_AfterHook:
 .include("hacks/ovl_obj_mure2.asm")
 .include("hacks/ovl_obj_hana.asm")
 .include("hacks/ovl_fishing.asm")
+.include "hacks/ovl_en_gs.asm"

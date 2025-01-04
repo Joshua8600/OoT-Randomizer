@@ -231,6 +231,13 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("KF Adult Grass 19",                                            ("Grass",      0x55, [(0,2,24,11),(0,3,31,11)], None,          'Rupees (5)',                           ("Kokiri Forest", "Forest Area", "Grass"))),
     ("KF Adult Grass 20",                                            ("Grass",      0x55, [(0,2,24,12),(0,3,31,12)], None,          'Rupees (5)',                           ("Kokiri Forest", "Forest Area", "Grass"))),
 
+    # Kokiri Forest Gossip Stones
+    ("KF Deku Tree Gossip Stone (Left) Drop", ("GossipStone", 0x55, [(1,0,8),(1,2,9),(1,3,4)], None, 'Rupees (20)', ("Kokiri Forest", "Forest Area","GossipStone"))),
+    ("KF Deku Tree Gossip Stone (Right) Drop", ("GossipStone", 0x55, [(1,0,9),(1,2,10),(1,3,5)], None, 'Rupees (20)', ("Kokiri Forest", "Forest Area","GossipStone"))),
+    ("KF Gossip Stone Drop", ("GossipStone", 0x55, [(0,0,16),(0,2,25),(0,3,9)], None, 'Rupees (20)', ("Kokiri Forest", "Forest Area","GossipStone"))),
+    ("KF Storms Grotto Gossip Stone Drop", ("GossipStone", 0x3E, (0,0x0C,10), None, 'Rupees (20)', ("Kokiri Forest", "Forest Area", "Grottos", "GossipStone"))),
+
+
     # Lost Woods
     ("LW Gift from Saria",                                           ("Cutscene",     0xFF,  0x02, None,                            'Ocarina',                               ("Lost Woods", "Forest Area", "NPCs",))),
     ("LW Ocarina Memory Game",                                       ("NPC",          0x5B,  0x76, None,                            'Piece of Heart',                        ("Lost Woods", "Forest Area", "Minigames",))),
@@ -294,6 +301,9 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("Lost Woods Near Meadow Grass 1",                               ("Grass",      0x5b, [(8,0,4),(8,2,5)], None,                  'Rupees (5)',                            ("Lost Woods", "Forest Area", "Grass"))),
     ("Lost Woods Near Meadow Grass 2",                               ("Grass",      0x5b, [(8,0,5),(8,2,6)], None,                  'Rupees (5)',                            ("Lost Woods", "Forest Area", "Grass"))),
     ("Lost Woods Near Meadow Grass 3",                               ("Grass",      0x5b, [(8,0,6),(8,2,7)], None,                  'Rupees (5)',                            ("Lost Woods", "Forest Area", "Grass"))),
+    # Lost Woods Gossip Stones
+    ("LW Gossip Stone Drop", ("GossipStone", 0x5B, [(5,2,2),(5,0,5)], None, 'Rupees (20)', ("Lost Woods", "Forest Area", "GossipStone"))),
+    ("LW Near Shortcuts Grotto Gossip Stone Drop", ("GossipStone", 0x3E, (0,0x14,10), None, 'Rupees (20)', ("Lost Woods", "Forest Area", "GossipStone"))),
 
     # Sacred Forest Meadow
     ("SFM Wolfos Grotto Chest",                                      ("Chest",        0x3E,  0x11, None,                            'Rupees (50)',                           ("Sacred Forest Meadow", "Forest Area", "Grottos", "Chests",))),
@@ -337,6 +347,11 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("SFM Adult Smashing Moblin",                                    ("EnemyDrop",    0x56, (0,2,11), None,                      'Rupees (5)',                            ("Sacred Forest Meadow", "Forest Area", "Enemy Drops",))),
     ("SFM Wolfos Grotto Wolfos 1",                                   ("EnemyDrop",    0x3E, (7,0x0D,1), None,                    'Rupees (5)',                            ("Sacred Forest Meadow", "Forest Area", "Grottos", "Enemy Drops",))),
     ("SFM Wolfos Grotto Wolfos 2",                                   ("EnemyDrop",    0x3E, (7,0x0D,2), None,                    'Rupees (5)',                            ("Sacred Forest Meadow", "Forest Area", "Grottos", "Enemy Drops",))),
+
+    # Sacred Forest Meadow Gossip Stones
+    ("SFM Maze Gossip Stone (Lower) Drop",                          ("GossipStone",  0x56,  [(0,0,3),(0,2,2)], None,               'Rupees (20)',                           ("Sacred Forest Meadow", "Forest Area", "GossipStone"))),
+    ("SFM Maze Gossip Stone (Upper) Drop",                          ("GossipStone",  0x56,  [(0,0,4),(0,2,3)], None,               'Rupees (20)',                           ("Sacred Forest Meadow", "Forest Area", "GossipStone"))),
+    ("SFM Saria Gossip Stone Drop",                                 ("GossipStone",  0x56,  [(0,0,5),(0,2,4)], None,               'Rupees (20)',                           ("Sacred Forest Meadow", "Forest Area", "GossipStone"))),
 
     # Hyrule Field
     ("HF Ocarina of Time Item",                                      ("NPC",          0x51,  0x0C, None,                            'Ocarina',                               ("Hyrule Field", "Need Spiritual Stones", "NPCs",))),
@@ -474,6 +489,12 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("HF Near KF Grass Patch 10",                                 ("Grass",      0x51, [(0,0,62,10),(0,1,60,10),(0,2,54,10)],   None,     'Rupees (5)',         ("Hyrule Field", "Grass"))),
     ("HF Near KF Grass Patch 11",                                 ("Grass",      0x51, [(0,0,62,11),(0,1,60,11),(0,2,54,11)],   None,     'Rupees (5)',         ("Hyrule Field", "Grass"))),
     ("HF Near KF Grass Patch 12",                                 ("Grass",      0x51, [(0,0,62,12),(0,1,60,12),(0,2,54,12)],   None,     'Rupees (5)',         ("Hyrule Field", "Grass"))),
+    # Hyrule Field Gossip Stones
+    ("HF Near Market Grotto Gossip Stone Drop", ("GossipStone", 0x3E, (0,0,10), None, 'Rupees (20)', ("Hyrule Field", "Grottos", "GossipStone"))),
+    ("HF Southeast Grotto Gossip Stone Drop", ("GossipStone", 0x3E, (0,2,10), None, 'Rupees (20)',   ("Hyrule Field", "Grottos", "GossipStone"))),
+    ("HF Open Grotto Gossip Stone Drop", ("GossipStone", 0x3E, (0,3,10), None, 'Rupees (20)',        ("Hyrule Field", "Grottos", "GossipStone"))),
+    ("HF Cow Grotto Gossip Stone Drop", ("GossipStone", 0x3E, (4,0x4,11), None, 'Rupees (20)',       ("Hyrule Field", "Grottos", "GossipStone"))),
+
     # Market
     ("Market Shooting Gallery Reward",                               ("NPC",          0x42,  0x60, None,                            'Slingshot',                             ("Market", "Minigames",))),
     ("Market Bombchu Bowling First Prize",                           ("NPC",          0x4B,  0x34, None,                            'Bomb Bag',                              ("Market", "Minigames",))),
@@ -638,7 +659,11 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
 
     # Temple of Time
     ("ToT Light Arrows Cutscene",                                    ("Cutscene",     0xFF,  0x01, None,                            'Light Arrows',                          ("Temple of Time", "NPCs",))),
-
+    ("ToT Light Arrows Cutscene",                                    ("Cutscene",     0xFF,  0x01, None,                            'Light Arrows',                          ("Temple of Time", "NPCs",))),
+    ("ToT Gossip Stone (Left) Drop", ("GossipStone", 0x23, [(0,0,2),(0,1,2),(0,2,2)], None, 'Rupees (20)',         ("Temple of Time", "GossipStone"))),
+    ("ToT Gossip Stone (Left-Center) Drop", ("GossipStone", 0x23, [(0,0,3),(0,1,3),(0,2,3)], None, 'Rupees (20)',  ("Temple of Time", "GossipStone"))),
+    ("ToT Gossip Stone (Right) Drop", ("GossipStone", 0x23, [(0,0,4),(0,1,4),(0,2,4)], None, 'Rupees (20)',        ("Temple of Time", "GossipStone"))),
+    ("ToT Gossip Stone (Right-Center) Drop", ("GossipStone", 0x23, [(0,0,5),(0,1,5),(0,2,5)], None, 'Rupees (20)', ("Temple of Time", "GossipStone"))),
 
     # Hyrule Castle
     ("HC Malon Egg",                                                 ("NPC",          0x5F,  0x47, None,                            'Weird Egg',                             ("Hyrule Castle", "NPCs",))),
@@ -672,6 +697,10 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("HC Castle Moat Wonderitem 9",                                  ("Wonderitem",   0x5F,  (0,0,41), None,                        'Rupee (1)',                             ("Hyrule Castle", "Wonderitems",))),
     ("HC Castle Moat Wonderitem 10",                                 ("Wonderitem",   0x5F,  (0,0,42), None,                        'Rupees (5)',                            ("Hyrule Castle", "Wonderitems",))),
     ("HC Zeldas Courtyard Mario Wonderitem",                         ("Wonderitem",   0x4A,  (0,0,6),  None,                        'Rupees (20)',                           ("Hyrule Castle", "Wonderitems",))),
+    # Hyrule Castle Gossip Stones
+    ("HC Malon Gossip Stone Drop", ("GossipStone", 0x5F, (0,0,4), None, 'Rupees (20)', ("Hyrule Castle","GossipStone"))),
+    ("HC Rock Wall Gossip Stone Drop", ("GossipStone", 0x5F, (0,0,3), None, 'Rupees (20)', ("Hyrule Castle","GossipStone"))),
+    ("HC Storms Grotto Gossip Stone Drop", ("GossipStone", 0x3E, (8,0x16,14), None, 'Rupees (20)', ("Hyrule Castle", "Grottos","GossipStone"))),
 
     # Hyrule Castle Enemies
     ("HC Storms Grotto Skullwalltula 1",                             ("EnemyDrop",    0x3E, (8,0x16,1), None,                      'Rupees (5)',                            ("Hyrule Castle", "Grottos", "Enemy Drops",))),
@@ -855,6 +884,9 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("Kak Grass 8",                                                  ("Grass",      0x52, [(0,0,44),(0,1,39),(0,2,32),(0,3,30)], None, 'Rupees (5)',                         ("Kakariko Village", "Grass"))),
 
 
+    # Kak Gossip Stones
+    ("Kak Open Grotto Gossip Stone Drop", ("GossipStone", 0x3E, (0,8,10), None, 'Rupees (20)', ("Kakariko Village", "Grottos", "GossipStone"))),
+
     # Graveyard
     ("Graveyard Shield Grave Chest",                                 ("Chest",        0x40,  0x00, None,                            'Hylian Shield',                         ("Graveyard", "Grottos", "Chests",))),
     ("Graveyard Heart Piece Grave Chest",                            ("Chest",        0x3F,  0x00, None,                            'Piece of Heart',                        ("Graveyard", "Grottos", "Chests",))),
@@ -898,10 +930,10 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("Graveyard Grass Patch 10",                           ("Grass",      0x53,  [(1,0,17,10),(1,1,21,10),(1,2,30,10),(1,3,30,10)], None,  'Rupees (5)',           ("Graveyard", "Grass"))),
     ("Graveyard Grass Patch 11",                           ("Grass",      0x53,  [(1,0,17,11),(1,1,21,11),(1,2,30,11),(1,3,30,11)], None,  'Rupees (5)',           ("Graveyard", "Grass"))),
     ("Graveyard Grass Patch 12",                           ("Grass",      0x53,  [(1,0,17,12),(1,1,21,12),(1,2,30,12),(1,3,30,12)], None,  'Rupees (5)',           ("Graveyard", "Grass"))),
-
-
     # Graveyard Crates
     ("Graveyard Freestanding PoH Crate",                             ("Crate",        0x53, [(1,0,22),(1,1,24),(1,2,34),(1,3,34)],None,'Nothing',                            ("Graveyard", "Crates",))),
+    # Graveyard Gossip Stones
+    ("Graveyard Gossip Stone Drop", ("GossipStone", 0x53, [(1,0,3),(1,1,51),(1,2,2),(1,3,2)], None, 'Rupees (20)', ("Graveyard","GossipStone"))),
 
     # Graveyard Wonderitems
     ("Graveyard Dampe Race Wonderitem 1",                            ("Wonderitem",   0x48, (1,0,6), None,                          'Rupee (1)',                             ("Graveyard", "Grottos", "Wonderitems",))),
@@ -1002,6 +1034,10 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("DMT Cow Grotto Grass 2",                                       ("Grass",        0x3e, (3,0x18,3), None,                       'Rupees (5)',                            ("Death Mountain Trail", "Grottos", "Grass"))),
 
 
+    # Death Mountain Trail Gossip Stones
+    ("DMT Gossip Stone Drop", ("GossipStone", 0x60, [(0,0,5),(0,2,2)], None, 'Rupees (20)', ("Death Mountain Trial","GossipStone"))),
+    ("DMT Storms Grotto Gossip Stone Drop", ("GossipStone", 0x3E, (0,0x17,10), None, 'Rupees (20)', ("Death Mountain Trial", "Grottos", "GossipStone"))),
+
     # Goron City
     ("GC Darunias Joy",                                              ("NPC",          0x62,  0x54, None,                            'Progressive Strength Upgrade',          ("Goron City", "NPCs",))),
     ("GC Pot Freestanding PoH",                                      ("Collectable",  0x62,  0x1F, None,                            'Piece of Heart',                        ("Goron City", "Freestandings",))),
@@ -1057,6 +1093,10 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
 
     # Goron City Beehives
     ("GC Grotto Beehive",                                            ("Beehive",      0x3E,  (12,0x1B,4), None,                     'Rupees (20)',                           ("Goron City", "Grottos", "Beehives",))),
+
+    # Goron City Gossip Stones
+    ("GC Maze Gossip Stone Drop", ("GossipStone", 0x62, [(0,2,1),(0,0,49)], None, 'Rupees (20)', ("Goron City","GossipStone"))),
+    ("GC Medigoron Gossip Stone Drop", ("GossipStone", 0x62, [(2,2,1),(2,0,6)], None, 'Rupees (20)', ("Goron City","GossipStone"))),
 
     # Death Mountain Crater
     ("DMC Volcano Freestanding PoH",                                 ("Collectable",  0x61,  0x08, None,                            'Piece of Heart',                        ("Death Mountain Crater", "Freestandings",))),
@@ -1114,6 +1154,9 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("DMC Second Plank Red Bubble 2",                                ("EnemyDrop",    0x61, (1,2,12), None,                         'Rupees (5)',                            ("Death Mountain Crater", "Enemy Drops",))),
     ("DMC Pierre Platform Red Bubble",                               ("EnemyDrop",    0x61, (1,2,13), None,                         'Rupees (5)',                            ("Death Mountain Crater", "Enemy Drops",))),
 
+    # Death Mountain Crater Gossip Stones
+    ("DMC Gossip Stone Drop",                                        ("GossipStone",  0x61, [(1,0,10),(1,2,2)], None,               'Rupees (20)',                           ("Death Mountain Crater", "GossipStone"))),
+    ("DMC Upper Grotto Gossip Stone Drop", ("GossipStone", 0x3E, (0,0x1A,10), None, 'Rupees (20)', ("Death Mountain Crater", "Grottos", "GossipStone"))),
 
     # Zora's River
     ("ZR Magic Bean Salesman",                                       ("NPC",          0x54,  0x16, None,                            'Buy Magic Bean',                        ("Zora's River", "NPCs",))),
@@ -1215,6 +1258,10 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("ZR Adult Octorok 5",                                           ("EnemyDrop",    0x54, (0,2,9), None,                          'Rupees (5)',                            ("Zora's River", "Enemy Drops",))),
     ("ZR Adult Octorok 6",                                           ("EnemyDrop",    0x54, (0,2,10), None,                         'Rupees (5)',                            ("Zora's River", "Enemy Drops",))),
 
+    # Zora's River Gossip Stones
+    ("ZR Near Grottos Gossip Stone Drop", ("GossipStone", 0x54, [(0,0,8),(0,2,11)], None, 'Rupees (20)', ("Zora's River", "GossipStone"))),
+    ("ZR Near Domain Gossip Stone Drop", ("GossipStone", 0x54, [(1,0,2),(1,2,6)], None, 'Rupees (20)',   ("Zora's River", "GossipStone"))),
+    ("ZR Open Grotto Gossip Stone Drop", ("GossipStone", 0x3E, (0,9,10), None, 'Rupees (20)',            ("Zora's River", "GossipStone"))),
 
     # Zora's Domain
     ("ZD Diving Minigame",                                           ("NPC",          0x58,  0x37, None,                            'Progressive Scale',                     ("Zora's Domain", "Minigames",))),
@@ -1246,6 +1293,9 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("ZD In Front of King Zora Beehive 1",                           ("Beehive",      0x58,  (0,0,10), None,                        'Rupees (20)',                           ("Zora's Domain", "Beehives",))),
     ("ZD In Front of King Zora Beehive 2",                           ("Beehive",      0x58,  (0,0,11), None,                        'Rupees (20)',                           ("Zora's Domain", "Beehives",))),
     ("ZD Behind King Zora Beehive",                                  ("Beehive",      0x58,  (0,0,12), None,                        'Rupees (20)',                           ("Zora's Domain", "Beehives",))),
+    # Zora's Domain Gossip Stones
+    ("ZD Gossip Stone Drop", ("GossipStone", 0x58, [(0,2,2),(0,0,14)], None, 'Rupees (20)', ("Zora's Domain","GossipStone"))),
+
 
 
     # Zora's Fountain
@@ -1286,6 +1336,10 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("ZF Near Jabu Pot 2",                                           ("Pot",          0x59,  [(0,0,22),(0,1,22)], None,             'Rupee (1)',                             ("Zora's Fountain", "Pots",))),
     ("ZF Near Jabu Pot 3",                                           ("Pot",          0x59,  [(0,0,23),(0,1,23)], None,             'Rupee (1)',                             ("Zora's Fountain", "Pots",))),
     ("ZF Near Jabu Pot 4",                                           ("Pot",          0x59,  [(0,0,24),(0,1,24)], None,             'Recovery Heart',                        ("Zora's Fountain", "Pots",))),
+    # Zora's Fountain Gossip Stones
+    ("ZF Fairy Gossip Stone Drop", ("GossipStone", 0x59, [(0,0,19),(0,1,19),(0,2,23)], None, 'Rupees (20)', ("Zora's Fountain", "GossipStone"))),
+    ("ZF Jabu Gossip Stone Drop", ("GossipStone", 0x59, [(0,0,21),(0,1,21),(0,2,24)], None, 'Rupees (20)',  ("Zora's Fountain", "GossipStone"))),
+
 
     # Zora's Fountain Enemies
     ("ZF Adult Octorok 1",                                           ("EnemyDrop",    0x59, (0,2,19), None,                         'Rupees (5)',                            ("Zora's Fountain", "Enemy Drops",))),
@@ -1432,6 +1486,11 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("LH Adult Fish 14",                                             ("Fish",                0x49, (0,0,1,13), None,                       'Fish (Adult 16 lb)',                             ("Lake Hylia", "Minigames", "Fish"))),
     ("LH Adult Fish 15",                                             ("Fish",                0x49, (0,0,1,14), None,                       'Fish (Adult 10 lb)',                             ("Lake Hylia", "Minigames", "Fish"))),
     ("LH Adult Loach",                                               ("Fish",                0x49, (0,0,1,15), None,                       'Hylian Loach',                                   ("Lake Hylia", "Minigames", "Fish"))),
+    # Lake Hylia Gossip Stones
+    ("LH Lab Gossip Stone Drop", ("GossipStone", 0x57, [(0,2,3),(0,0,53)], None, 'Rupees (20)',         ("Lake Hylia","GossipStone"))),
+    ("LH Gossip Stone (Southeast) Drop", ("GossipStone", 0x57, [(0,2,4),(0,0,55)], None, 'Rupees (20)', ("Lake Hylia","GossipStone"))),
+    ("LH Gossip Stone (Southwest) Drop", ("GossipStone", 0x57, [(0,2,5),(0,0,54)], None, 'Rupees (20)', ("Lake Hylia","GossipStone"))),
+
 
     # Gerudo Valley
     ("GV Crate Freestanding PoH",                                    ("Collectable",  0x5A,  0x02, None,                            'Piece of Heart',                        ("Gerudo Valley", "Freestandings",))),
@@ -1481,6 +1540,8 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("GV Adult Lower Octorok 2",                                     ("EnemyDrop",    0x5A, (0, 2, 6), None,                    'Rupees (5)',                            ("Gerudo Valley", "Enemy Drops",))),
     ("GV Octorok Grotto Octorok",                                    ("EnemyDrop",    0x3E, (5, 0x12, 1), None,                 'Rupees (5)',                            ("Gerudo Valley", "Grottos", "Enemy Drops",))),
 
+    # Gerudo Valley Gossip Stones
+    ("GV Gossip Stone Drop", ("GossipStone", 0x5A, [(0,0,9),(0,2,46)], None, 'Rupees (20)', ("Gerudo Valley","GossipStone"))),
 
     # Gerudo's Fortress
     ("GF Chest",                                                     ("Chest",        0x5D,  0x00, None,                            'Piece of Heart',                        ("Gerudo's Fortress", "Chests",))),
@@ -1627,6 +1688,10 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("Colossus Adult Guay 3",                                        ("EnemyDrop",    0x5C, (0,2,10), None,                              'Rupees (5)',                            ("Desert Colossus", "Enemy Drops",))),
     ("Colossus Adult Guay 4",                                        ("EnemyDrop",    0x5C, (0,2,11), None,                              'Rupees (5)',                            ("Desert Colossus", "Enemy Drops",))),
     ("Colossus Adult Guay 5",                                        ("EnemyDrop",    0x5C, (0,2,12), None,                              'Rupees (5)',                            ("Desert Colossus", "Enemy Drops",))),
+
+
+    # Colossus Gossip Stone
+    ("Colossus Gossip Stone Drop", ("GossipStone", 0x5C, [(0,0,4),(0,2,3)], None, 'Rupees (20)', ("Desert Colossus","GossipStone"))),
 
 
     # Outside Ganon's Castle
@@ -1963,6 +2028,7 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("Dodongos Cavern Before Back Room Keese 1",                     ("EnemyDrop",    0x01,  (8, 0, 0x01), None,                   'Rupees (5)',                            ("Dodongo's Cavern", "Vanilla Dungeons", "Enemy Drops",))),
     ("Dodongos Cavern Before Back Room Keese 2",                     ("EnemyDrop",    0x01,  (8, 0, 0x02), None,                   'Rupees (5)',                            ("Dodongo's Cavern", "Vanilla Dungeons", "Enemy Drops",))),
     ("Dodongos Cavern Back Room Armos",                              ("EnemyDrop",    0x01,  (14, 0, 0x01), None,                  'Rupees (5)',                            ("Dodongo's Cavern", "Vanilla Dungeons", "Enemy Drops",))),
+    ("Dodongos Cavern Gossip Stone Drop", ("GossipStone", 0x01, (0,0,26), None, 'Rupees (20)', ("Dodongo's Cavern", "Vanilla Dungeons", "GossipStone"))),
 
     # Dodongo's Cavern MQ
     ("Dodongos Cavern MQ Map Chest",                                 ("Chest",        0x01,  0x00, None,                            'Map (Dodongos Cavern)',                 ("Dodongo's Cavern MQ", "Master Quest", "Chests",))),
@@ -2115,6 +2181,9 @@ location_table: dict[str, tuple[str, Optional[int], LocationDefault, LocationAdd
     ("Dodongos Cavern MQ Song of Time Block Room Skulltula 2",       ("EnemyDrop",    0x01,  (15,0,3), None,                        'Rupees (5)',                            ("Dodongo's Cavern MQ", "Master Quest", "Enemy Drops",))),
     ("Dodongos Cavern MQ Song of Time Block Room Skulltula 3",       ("EnemyDrop",    0x01,  (15,0,4), None,                        'Rupees (5)',                            ("Dodongo's Cavern MQ", "Master Quest", "Enemy Drops",))),
 
+    # Dodongo's Cavern MQ Gossip Stones
+    ("Dodongos Cavern MQ Gossip Stone Drop",                         ("GossipStone",  0x1,   (0,0,1), None,                         'Rupees (20)',                           ("Dodongo's Cavern MQ", "Master Quest", "GossipStone"))),
+    
     # Dodongo's Cavern Shared
     ("Dodongos Cavern Boss Room Chest",                              ("Chest",        0x12,  0x00, None,                            'Bombs (5)',                             ("Dodongo's Cavern", "Dodongo's Cavern MQ", "Vanilla Dungeons", "Master Quest", "Chests",))),
     ("Dodongos Cavern King Dodongo Heart",                           ("BossHeart",    0x12,  0x4F, None,                            'Heart Container',                       ("Dodongo's Cavern", "Dodongo's Cavern MQ", "Vanilla Dungeons", "Master Quest",))),

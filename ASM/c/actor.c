@@ -42,6 +42,7 @@ extern xflag_t* spawn_actor_with_flag;
 #define EN_KUSA             0x0125 // Grass/Bush
 #define OBJ_MURE2           0x0151 // Obj_Mure2 - Bush/Rock circles
 #define ACTOR_FISHING       0xFE // Fishing fish
+#define EN_GS               0x1B9   // Gossip Stone
 
 uint8_t actor_spawn_as_child_flag = 0;
 z64_actor_t* actor_spawn_as_child_parent = NULL;
@@ -126,6 +127,7 @@ void Actor_StoreFlag(z64_actor_t* actor, z64_game_t* game, xflag_t flag) {
             case EN_SW: // Check for skullwalltula (en_sw). They start as category 4 (npc) and change to category 5 but a frame later if the object isnt laoded
             case EN_ANUBICE_TAG: //Check for anubis spawns
             case ACTOR_FISHING:
+            case EN_GS:
             {
                 extra->flag = flag;
                 // Add marker for enemy drops

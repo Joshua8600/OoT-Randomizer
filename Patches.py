@@ -2380,7 +2380,7 @@ def get_override_entry(location: Location) -> Optional[OverrideEntry]:
         return None
 
     # Don't add freestanding items, pots/crates, beehives to the override table if they're disabled. We use this check to determine how to draw and interact with them
-    if location.type in ('ActorOverride', 'Freestanding', 'RupeeTower', 'Pot', 'Crate', 'FlyingPot', 'SmallCrate', 'Beehive', 'Wonderitem', 'EnemyDrop', 'Grass', 'Fish') and location.disabled != DisableType.ENABLED:
+    if location.type in ('ActorOverride', 'Freestanding', 'RupeeTower', 'Pot', 'Crate', 'FlyingPot', 'SmallCrate', 'Beehive', 'Wonderitem', 'EnemyDrop', 'Grass', 'Fish', 'GossipStone') and location.disabled != DisableType.ENABLED:
         return None
 
     #Don't add enemy drops to the override table if they're disabled.
@@ -2398,7 +2398,7 @@ def get_override_entry(location: Location) -> Optional[OverrideEntry]:
     elif location.type == 'Chest':
         type = 1
         default &= 0x1F
-    elif location.type in ('Freestanding', 'Pot', 'Crate', 'FlyingPot', 'SmallCrate', 'RupeeTower', 'Beehive', 'SilverRupee', 'Wonderitem', 'EnemyDrop', 'Grass', 'Fish'):
+    elif location.type in ('Freestanding', 'Pot', 'Crate', 'FlyingPot', 'SmallCrate', 'RupeeTower', 'Beehive', 'SilverRupee', 'Wonderitem', 'EnemyDrop', 'Grass', 'Fish', 'GossipStone'):
         type = 6
         if not (isinstance(location.default, list) or isinstance(location.default, tuple)):
             raise Exception("Not right")
