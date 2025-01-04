@@ -1526,7 +1526,7 @@ typedef struct {
   char             unk_17_[0x007C];        /* 0x11CCC */
   int32_t          (*startPlayerFishing)(struct z64_game_t* globalCtx); /* 0x11D48*/
   char             unk_17_2[0x0054];       /* 0x11D4C */
-  float            mf_11DA0[4][4];         /* 0x11DA0 */
+  float            billboard_mtx[4][4];    /* 0x11DA0 */
   char             unk_18_[0x0004];        /* 0x11DE0 */
   uint32_t         gameplay_frames;        /* 0x11DE4 */
   uint8_t          link_age;               /* 0x11DE8 */
