@@ -90,7 +90,7 @@ def get_version_bytes(a: str, b: int = 0x00, c: int = 0x00) -> list[int]:
 
     sa = a.replace('v', '').replace(' ', '.').split('.')
 
-    for i in range(0, 3):
+    for i in range(0, min(len(sa), 4)):
         try:
             version_byte = int(sa[i])
         except ValueError:

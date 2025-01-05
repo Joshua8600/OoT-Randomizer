@@ -173,6 +173,8 @@
             "shuffle_bosses",
             "shuffle_ganon_tower",
             "shuffle_overworld_entrances",
+            "mix_entrance_pools",
+            "decouple_entrances",
             "shuffle_gerudo_valley_river_exit",
             "owl_drops",
             "warp_songs",
@@ -478,7 +480,8 @@
             "zora_color",
             "silver_gauntlets_color",
             "golden_gauntlets_color",
-            "mirror_shield_frame_color"
+            "mirror_shield_frame_color",
+            "extra_equip_colors"
           ]
         },
         {
