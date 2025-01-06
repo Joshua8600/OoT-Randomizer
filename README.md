@@ -663,6 +663,13 @@ issue. You should always Hard Reset to avoid this issue entirely.
 * Fix importing settings from older versions on web.
 * Fix a Mac-specific issue when loading track .meta files.
 * Fix an error in the easy bite fishing hack.
+<<<<<<< HEAD
+=======
+* The randomizer no longer ignores errors when decompressing the base rom or compressing the randomized rom.
+* Trade quest items from skipped locations are no longer lost when another trade item is found.
+* Fix a crash when dungeon rewards are directly selected as starting items.
+* Fix an error with pre-completed dungeon rewards in multiworld.
+>>>>>>> upstream
 
 #### New Speedups
 * The first text box from each carpenter in the Thieves' Hideout is skipped.
@@ -679,6 +686,7 @@ issue. You should always Hard Reset to avoid this issue entirely.
 * Farore's Wind now displays which dungeon it will warp Link to.
 * Reversed the order of the hints in the `Spirit Temple Adult Lower` dual hint.
 * Add adult and child trade items to the auto-tracker context.
+* Improve Debug menu with new options and menus.
 
 ### 8.2
 
