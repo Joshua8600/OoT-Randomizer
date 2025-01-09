@@ -63,7 +63,7 @@
             "Jabu Jabus Belly MQ Basement Near Switches Chest": "can_use(Slingshot)",
             "Jabu Jabus Belly MQ Boomerang Room Small Chest": "True",
             "Jabu Jabus Belly MQ Boomerang Chest": "
-                can_kill_lizalfos_with_bombs and has_soul(Stinger) and has_soul(Likelike)",
+                can_kill_lizalfos_with_bombs and has_soul(Stinger) and has_soul(Like_Like)",
             "Jabu Jabus Belly MQ Boomerang Room Pot 1": "True",
             "Jabu Jabus Belly MQ Boomerang Room Pot 2": "True",
             # These grass can be reached with a spin attack through the boulder regardless of boulder type
@@ -130,10 +130,10 @@
         "dungeon": "Jabu Jabus Belly",
         "events": {
             "Jabu Jabus Belly Center Tentacle Cleared": "has_soul(Jabu_Jabu_Tentacle) and can_pass_boulder('JABU_DEPTHS_BOULDER_1') and can_pass_boulder('JABU_DEPTHS_BOULDER_2')",
-            "Jabu Jabus Belly Right Tentacle Cleared": "has_soul(Jabu_Jabu_Tentacle) and ((Sticks and has_soul(Likelike)) or can_use(Dins_Fire))"
+            "Jabu Jabus Belly Right Tentacle Cleared": "has_soul(Jabu_Jabu_Tentacle) and ((Sticks and has_soul(Like_Like)) or can_use(Dins_Fire))"
         },
         "locations": {
-            "Jabu Jabus Belly MQ Falling Like Like Room Chest": "has_soul(Likelike)",
+            "Jabu Jabus Belly MQ Falling Like Like Room Chest": "has_soul(Like_Like)",
             "Jabu Jabus Belly MQ Falling Like Like Room Pot 1": "True",
             "Jabu Jabus Belly MQ Falling Like Like Room Pot 2": "True",
             "Jabu Jabus Belly MQ Falling Like Like Room Right Cow Wonderitem 1": "True",
@@ -149,8 +149,8 @@
             "Jabu Jabus Belly MQ Hallway Small Crate 1": "True",
             "Jabu Jabus Belly MQ Hallway Small Crate 2": "True",
             "Jabu Jabus Belly MQ Hallway Lizalfos": "has_soul(Lizalfos_and_Dinalfos)",
-            "Jabu Jabus Belly MQ Falling Like Like Room Like Like 1": "has_soul(Likelike)",
-            "Jabu Jabus Belly MQ Falling Like Like Room Like Like 2": "has_soul(Likelike)",
+            "Jabu Jabus Belly MQ Falling Like Like Room Like Like 1": "has_soul(Like_Like)",
+            "Jabu Jabus Belly MQ Falling Like Like Room Like Like 2": "has_soul(Like_Like)",
             "Bombable Fairy": "has_bottle"
         },
         "exits": {
