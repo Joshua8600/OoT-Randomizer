@@ -1,0 +1,8 @@
+cd ASM
+python3 build.py --compile-c
+
+
+Other:
+1. put "armips" in /ASM/tools
+2. but ZOOTDEC.z64 in /ASM/roms and rename to base.z64
+3. the directory /ASM/build/bin must exist

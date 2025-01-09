@@ -342,6 +342,20 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
     rom.write_int32s(0x14B9CB8, [0x00000000, 0x00000000, 0x00000000, 0x00000000])  # Boss Key (Key)
     rom.write_int32s(0x14B9F20, [0x00000000, 0x00000000, 0x00000000, 0x00000000])  # Boss Key (Gem)
 
+    if world.settings.climb_anywhere:
+        # Delete the check for SurfaceType_IsHookshotSurface from the hookshot actor
+        rom.write_int32(0xCADAF8, 0x00000000)
+        # Override default wall flags to add climbable surface flag
+        # See D_80119D90, SurfaceType wall properties in z_bgcheck.c in decomp
+        for idx in range(32):
+            if idx == 2:
+                # 3rd entry is for ladders, which have a different flag that
+                # centers link horizontally on the climbable surface
+                continue
+            wall_flags = rom.read_int32(0xB61F80 + idx * 4)
+            wall_flags = wall_flags | 0x00000008
+            rom.write_int32(0xB61F80 + idx*4, wall_flags)
+
     # Force language to be English in the event a Japanese rom was submitted
     rom.write_byte(0x3E, 0x45)
     rom.force_patch.append(0x3E)
@@ -1341,6 +1355,9 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
         mq_scenes.append(4)
     if world.dungeon_mq['Water Temple']:
         mq_scenes.append(5)
+        tex = open('data/water_texture.bin', 'rb')
+        bytes = tex.read()
+        rom.write_bytes(0x1990000, bytes)
     if world.dungeon_mq['Spirit Temple']:
         mq_scenes.append(6)
     if world.dungeon_mq['Shadow Temple']:
@@ -2175,6 +2192,60 @@ def patch_rom(spoiler: Spoiler, world: World, rom: Rom) -> Rom:
                 chars_in_section += 1
                 text_codes.append(code)
         update_message_by_id(messages, message_id, ''.join(code.get_string() for code in text_codes))
+
+    # Remove age requirements on most equipment and items
+    # More information at https://wiki.cloudmodding.com/oot/Item_Usability_Table
+    if world.settings.no_age_limits:
+        # Item usability
+        rom.write_byte(0xBC7794 + 0x00, 0x09) # Deku Sticks
+        rom.write_byte(0xBC7794 + 0x0C, 0x09) # Boomerang
+        rom.write_byte(0xBC7794 + 0x0F, 0x09) # Megaton Hammer
+        rom.write_byte(0xBC7794 + 0x16, 0x09) # Adult Trade Item
+        rom.write_byte(0xBC7794 + 0x17, 0x09) # Child Trade Item
+        rom.write_byte(0xBC7794 + 0x19, 0x09) # Kokiri Sword
+        rom.write_byte(0xBC7794 + 0x1B, 0x09) # Biggoron Sword
+        rom.write_byte(0xBC7794 + 0x1D, 0x09) # Deku Shield
+        rom.write_byte(0xBC7794 + 0x1F, 0x09) # Mirror Shield
+        rom.write_byte(0xBC7794 + 0x22, 0x09) # Goron Tunic
+        rom.write_byte(0xBC7794 + 0x23, 0x09) # Zora Tunic
+        rom.write_byte(0xBC7794 + 0x26, 0x09) # Iron Boots
+        rom.write_byte(0xBC7794 + 0x27, 0x09) # Hover Boots
+        # Pause menu appearance
+        rom.write_byte(0xBC7794 + 0x28, 0x09) # Deku Sticks
+        rom.write_byte(0xBC7794 + 0x36, 0x09) # Boomerang
+        rom.write_byte(0xBC7794 + 0x39, 0x09) # Megaton Hammer
+        rom.write_byte(0xBC7794 + 0x63, 0x09) # Kokiri Sword
+        rom.write_byte(0xBC7794 + 0x65, 0x09) # Biggoron Sword
+        rom.write_byte(0xBC7794 + 0x66, 0x09) # Deku Shield
+        rom.write_byte(0xBC7794 + 0x68, 0x09) # Mirror Shield
+        rom.write_byte(0xBC7794 + 0x6A, 0x09) # Goron Tunic
+        rom.write_byte(0xBC7794 + 0x6B, 0x09) # Zora Tunic
+        rom.write_byte(0xBC7794 + 0x6D, 0x09) # Iron Boots
+        rom.write_byte(0xBC7794 + 0x6E, 0x09) # Hover Boots
+        rom.write_byte(0xBC7794 + 0x49, 0x09) # Child Trade Items
+        rom.write_byte(0xBC7794 + 0x4A, 0x09)
+        rom.write_byte(0xBC7794 + 0x4B, 0x09)
+        rom.write_byte(0xBC7794 + 0x4C, 0x09)
+        rom.write_byte(0xBC7794 + 0x4D, 0x09)
+        rom.write_byte(0xBC7794 + 0x4E, 0x09)
+        rom.write_byte(0xBC7794 + 0x4F, 0x09)
+        rom.write_byte(0xBC7794 + 0x50, 0x09)
+        rom.write_byte(0xBC7794 + 0x51, 0x09)
+        rom.write_byte(0xBC7794 + 0x52, 0x09)
+        rom.write_byte(0xBC7794 + 0x53, 0x09)
+        rom.write_byte(0xBC7794 + 0x55, 0x09) # Adult Trade Items
+        rom.write_byte(0xBC7794 + 0x56, 0x09)
+        rom.write_byte(0xBC7794 + 0x57, 0x09)
+        rom.write_byte(0xBC7794 + 0x58, 0x09)
+        rom.write_byte(0xBC7794 + 0x59, 0x09)
+        rom.write_byte(0xBC7794 + 0x5A, 0x09)
+        rom.write_byte(0xBC7794 + 0x5B, 0x09)
+        rom.write_byte(0xBC7794 + 0x5C, 0x09)
+        rom.write_byte(0xBC7794 + 0x5D, 0x09)
+        rom.write_byte(0xBC7794 + 0x5E, 0x09)
+        rom.write_byte(0xBC7794 + 0x5F, 0x09)
+        # D-pad boots as both ages
+        # rom.write_byte(rom.sym('CFG_AGELESS_BOOTS'), 0x01)
 
     permutation = None
 
