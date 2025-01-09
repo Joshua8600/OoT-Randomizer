@@ -19,6 +19,10 @@ Fishing Game Shuffle - Shuffle the fish from the fishing game. The fish in the p
 ## Index
 
 * [RealRob's Changelog](#realrob-changelog)
+  * [v124](#v124)
+  * [v123](#v123)
+  * [v122](#v122)
+  * [v121](#v121)
   * [v120](#v120)
   * [v118](#v118)
   * [v117](#v117)
@@ -145,6 +149,10 @@ Fishing Game Shuffle - Shuffle the fish from the fishing game. The fish in the p
   * [4.0](#40)
 
 ## RealRob Changelog
+### v124
+  * Increase size of markers on enemy minimap tracker
+  * Rename Like-like to Like Like across the code
+
 ### v123
   * Enemy drops souls logic review fixes
   * Rebuilt entire branch
