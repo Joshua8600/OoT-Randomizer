@@ -405,6 +405,8 @@
             "damage_multiplier",
             "gloom",
             "deadly_bonks",
+            "climb_anywhere",
+            "no_age_limits",
             "starting_tod",
             "blue_fire_arrows",
             "fix_broken_actors",
