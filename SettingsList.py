@@ -4276,7 +4276,8 @@ class SettingInfos:
         ''',
         shared         = True,
     )
-        no_age_limits = Checkbutton(
+    
+    no_age_limits = Checkbutton(
         gui_text       = 'Disable Item Age Checks',
         gui_tooltip    = '''\
             Make most items usable as both ages.
