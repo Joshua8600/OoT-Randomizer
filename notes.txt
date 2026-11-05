@@ -1,5 +1,6 @@
 cd ASM
-python3 build.py --compile-c
+python3 build.py --compile-c //old
+python3 build.py --no-compile-c //new
 
 
 Other:
